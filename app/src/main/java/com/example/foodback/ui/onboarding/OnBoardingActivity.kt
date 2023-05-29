@@ -19,10 +19,12 @@ class OnBoardingActivity : AppCompatActivity() {
 
         binding.btnMoveRegister.setOnClickListener{
             startActivity(Intent(this, AuthActivity::class.java))
+            finish()
         }
 
         binding.btnMoveLogin.setOnClickListener {
             startActivity(Intent(this, AuthActivity::class.java))
+            finish()
         }
     }
 

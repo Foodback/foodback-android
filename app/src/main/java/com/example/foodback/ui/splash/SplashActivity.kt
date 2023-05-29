@@ -13,7 +13,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.example.foodback.R
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.auth.AuthViewModel
-import com.example.foodback.ui.home.HomeActivity
+import com.example.foodback.ui.main.MainActivity
 import com.example.foodback.ui.onboarding.OnBoardingActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -35,8 +35,8 @@ class SplashActivity : AppCompatActivity() {
         super.onResume()
         handler.postDelayed({
             authViewModel.isLogin().observe(this){
-                if(!it.isNullOrEmpty()){
-                    startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
+                if(it != null){
+                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                 }else{
                     startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
                 }
