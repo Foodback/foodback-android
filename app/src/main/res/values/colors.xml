@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="pink_500">#D81B60</color>
     <color name="pink_200">#FF8FAF</color>
+    <color name="primary">#52B788</color>
+    <color name="second_text1">#343A40</color>
+    <color name="primary_text">#40916C</color>
+    <color name="second_text2">#6C757D</color>
 </resources>
