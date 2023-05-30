@@ -1,5 +1,6 @@
 package com.example.foodback.utils
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
@@ -18,6 +19,7 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.net.URL
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
@@ -91,4 +93,9 @@ fun getBitMap(url: String): Bitmap?{
         Log.e("MediaUtility", "getBitMap: Error getting image bitmap")
         null
     }
+}
+
+@SuppressLint("SimpleDateFormat")
+fun toSimpleString(date: Date): String {
+    return SimpleDateFormat("EEE, dd MM yyy").format(date)
 }

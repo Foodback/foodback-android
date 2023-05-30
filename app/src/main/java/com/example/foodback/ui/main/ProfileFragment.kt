@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -42,15 +43,17 @@ class ProfileFragment : Fragment() {
             authViewModel.logout().observe(requireActivity()) { result ->
                 when(result){
                     is Result.Loading -> {
-                        Log.i("TEST", "LOADING..........")
+                        binding.pbLogout.visibility = View.VISIBLE
                     }
                     is Result.Success -> {
-                    Log.i("TEST", "SUCCESS ${result.data}")
+                        binding.pbLogout.visibility = View.GONE
+                        Toast.makeText(requireActivity(), "Logout Success", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(requireActivity(), OnBoardingActivity::class.java))
                         requireActivity().finish()
                     }
                     is Result.Error -> {
-                    Log.i("TEST", "ERROR.......... ${result.error}")
+                        binding.pbLogout.visibility = View.GONE
+                        Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
                     }
                 }
             }

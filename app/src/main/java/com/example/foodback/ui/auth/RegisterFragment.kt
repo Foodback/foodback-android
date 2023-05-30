@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -49,30 +50,34 @@ class RegisterFragment : Fragment() {
             authViewModel.register(email, password).observe(requireActivity()){ result ->
                 when(result){
                     is Result.Loading ->{
-                        Log.i("TEST", "LOADING..........")
+                        binding.pbRegister.visibility = View.VISIBLE
                     }
                     is Result.Success ->{
-                        Log.i("TEST", "SUCCESS..........")
+                        binding.pbRegister.visibility = View.GONE
+                        Toast.makeText(requireActivity(), "Register success, please login", Toast.LENGTH_SHORT).show()
+                        moveToLogin()
                     }
                     is Result.Error ->{
-                        Log.i("TEST", "ERROR.......... ${result.error}")
+                        binding.pbRegister.visibility = View.GONE
+                        Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
-
-        binding.btnMoveToLogin.setOnClickListener {
-            val mLoginFragment = LoginFragment()
-            val mFragmentManager = parentFragmentManager
-            mFragmentManager.popBackStack()
-            mFragmentManager.commit {
-                replace(R.id.frame_container, mLoginFragment, LoginFragment::class.java.simpleName)
-            }
-        }
+        binding.btnMoveToLogin.setOnClickListener { moveToLogin() }
     }
 
     private fun playAnimation(){
 
+    }
+
+    private fun moveToLogin(){
+        val mLoginFragment = LoginFragment()
+        val mFragmentManager = parentFragmentManager
+        mFragmentManager.popBackStack()
+        mFragmentManager.commit {
+            replace(R.id.frame_container, mLoginFragment, LoginFragment::class.java.simpleName)
+        }
     }
 
     override fun onDestroy() {

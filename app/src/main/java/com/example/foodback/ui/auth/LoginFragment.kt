@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -51,15 +52,17 @@ class LoginFragment : Fragment() {
             authViewModel.login(email, password).observe(requireActivity()){ result ->
                 when(result){
                     is Result.Loading ->{
-                        Log.i("TEST", "LOADING..........")
+                       binding.pbLogin.visibility = View.VISIBLE
                     }
                     is Result.Success ->{
-                        Log.i("TEST", "SUCCESS ${result.data}")
+                        binding.pbLogin.visibility = View.GONE
+                        Toast.makeText(requireActivity(), "Login Success", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(requireActivity(), MainActivity::class.java))
                         requireActivity().finish()
                     }
                     is Result.Error ->{
-                        Log.i("TEST", "ERROR.......... ${result.error}")
+                        binding.pbLogin.visibility = View.GONE
+                        Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
                     }
                 }
             }

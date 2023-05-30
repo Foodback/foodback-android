@@ -35,12 +35,6 @@
             android:name=".ui.auth.AuthActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.diary.DiaryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.profile.ProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.onboarding.OnBoardingActivity"
             android:exported="false" />
         <activity
@@ -52,9 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.home.HomeActivity"
-            android:exported="false" />
     </application>
 
 </manifest>
