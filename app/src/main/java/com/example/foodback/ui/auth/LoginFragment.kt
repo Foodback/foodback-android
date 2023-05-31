@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
     private fun setupAction(){
         binding.btnLogin.setOnClickListener {
             val email = binding.edEmailLogin.text.toString().trim()
-            val password = binding.edPasswordRegister.text.toString()
+            val password = binding.edPasswordLogin.text.toString()
             Log.i("TEST", email)
             Log.i("TEST", password)
             authViewModel.login(email, password).observe(requireActivity()){ result ->
