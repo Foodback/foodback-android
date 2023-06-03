@@ -10,6 +10,11 @@ data class FakeAddButton(
     val name: String,
 )
 
+data class FakeAddData(
+    val name: String,
+    val desc: String,
+)
+
 //data class FakeFood(
 //    val name: String,
 //    val desc: String,

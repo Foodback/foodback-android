@@ -17,6 +17,8 @@ class DetailActivity : AppCompatActivity() {
         _activitDetailBinding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         binding.btnAddToDiary.setOnClickListener {
             finish()
         }

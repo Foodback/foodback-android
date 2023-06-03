@@ -1,4 +1,4 @@
-package com.example.foodback.ui.auth
+package com.example.foodback.ui.register
 
 import android.content.Context
 import android.content.Intent
@@ -13,73 +13,61 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.commit
 import com.example.foodback.R
 import com.example.foodback.data.Result
-import com.example.foodback.databinding.FragmentLoginBinding
+import com.example.foodback.databinding.FragmentRegisterBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.main.MainActivity
+import com.example.foodback.ui.login.LoginActivity
 
-class LoginFragment : Fragment() {
+class RegisterFragment : Fragment() {
 
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
-    private val authViewModel: AuthViewModel by activityViewModels {
+    private val registerViewModel: RegisterViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireActivity().dataStore)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupAction()
-        playAnimation()
-    }
 
-    private fun setupAction(){
-        binding.btnLogin.setOnClickListener {
-            val email = binding.edEmailLogin.text.toString().trim()
-            val password = binding.edPasswordLogin.text.toString()
-            Log.i("TEST", email)
-            Log.i("TEST", password)
-            authViewModel.login(email, password).observe(requireActivity()){ result ->
+        binding.btnRegister.setOnClickListener {
+            val email = binding.edEmailRegister.text.toString().trim()
+            val password = binding.edPasswordRegister.text.toString()
+            val name = binding.edNameRegister.text.toString().trim()
+            registerViewModel.addData("name", name)
+            registerViewModel.register(email, password).observe(requireActivity()){ result ->
                 when(result){
                     is Result.Loading ->{
-                       binding.pbLogin.visibility = View.VISIBLE
+                        binding.pbRegister.visibility = View.VISIBLE
                     }
                     is Result.Success ->{
-                        binding.pbLogin.visibility = View.GONE
-                        Toast.makeText(requireActivity(), "Login Success", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(requireActivity(), MainActivity::class.java))
+                        binding.pbRegister.visibility = View.GONE
+                        Toast.makeText(requireActivity(), "Register success, please login", Toast.LENGTH_SHORT).show()
+                        Log.i("TEST", registerViewModel.data.entries.toString())
+                        startActivity(Intent(requireActivity(), LoginActivity::class.java))
                         requireActivity().finish()
                     }
                     is Result.Error ->{
-                        binding.pbLogin.visibility = View.GONE
+                        binding.pbRegister.visibility = View.GONE
                         Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
 
-        binding.btnMoveToRegister.setOnClickListener {
-            val mRegisterFragment = RegisterFragment()
-            val mFragmentManager = parentFragmentManager
-            mFragmentManager.commit {
-                addToBackStack(null)
-                replace(R.id.frame_container, mRegisterFragment, RegisterFragment::class.java.simpleName)
-            }
+        binding.tvMoveToLogin.setOnClickListener{
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            requireActivity().finish()
         }
-    }
-
-    private fun playAnimation(){
-
     }
 
     override fun onDestroy() {

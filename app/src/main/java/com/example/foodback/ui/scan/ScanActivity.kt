@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.example.foodback.R
 import com.example.foodback.databinding.ActivityScanBinding
 import com.example.foodback.ui.detail.DetailActivity
+import com.example.foodback.ui.preview.PreviewActivity
 import com.example.foodback.utils.createFile
 
 class ScanActivity : AppCompatActivity() {
@@ -29,6 +30,8 @@ class ScanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportActionBar?.hide()
+
         _activityScanBinding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -38,7 +41,6 @@ class ScanActivity : AppCompatActivity() {
 
     public override fun onResume() {
         super.onResume()
-        hideSystemUI()
         startCamera()
     }
 
@@ -51,7 +53,7 @@ class ScanActivity : AppCompatActivity() {
                 Toast.makeText(this@ScanActivity, "Failed to take a picture.", Toast.LENGTH_SHORT).show()
             }
             override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                val intent = Intent(this@ScanActivity, DetailActivity::class.java)
+                val intent = Intent(this@ScanActivity, PreviewActivity::class.java)
                 intent.putExtra("picture", photoFile)
                 intent.putExtra("isBackCamera", cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
 //                setResult(AddStoryActivity.CAMERA_X_RESULT, intent)
@@ -87,19 +89,6 @@ class ScanActivity : AppCompatActivity() {
 
             startCamera()
         }
-    }
-
-    private fun hideSystemUI() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.hide()
     }
 
     override fun onDestroy() {

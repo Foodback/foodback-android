@@ -13,7 +13,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.foodback.R
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.auth.AuthViewModel
+import com.example.foodback.ui.login.LoginViewModel
 import com.example.foodback.ui.main.MainActivity
 import com.example.foodback.ui.onboarding.OnBoardingActivity
 
@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
 
     private val handler = Handler(Looper.getMainLooper())
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
-    private val authViewModel: AuthViewModel by viewModels {
+    private val loginViewModel: LoginViewModel by viewModels {
         ViewModelFactory.getInstance(dataStore)
     }
 
@@ -30,16 +30,12 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         supportActionBar?.hide()
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
     }
 
     override fun onResume() {
         super.onResume()
         handler.postDelayed({
-            authViewModel.isLogin().observe(this){
+            loginViewModel.isLogin().observe(this){
                 if(it != null){
                     startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                 }else{

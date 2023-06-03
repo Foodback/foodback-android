@@ -79,5 +79,4 @@ class DiaryAdapter(private val data: List<Any>, private val onClickData: (FakeDa
         private const val ITEM_DATA = 1
         private const val ITEM_BUTTON = 2
     }
-
 }

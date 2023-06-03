@@ -94,8 +94,3 @@ fun getBitMap(url: String): Bitmap?{
         null
     }
 }
-
-@SuppressLint("SimpleDateFormat")
-fun toSimpleString(date: Date): String {
-    return SimpleDateFormat("EEE, dd MM yyy").format(date)
-}

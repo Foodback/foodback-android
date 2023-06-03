@@ -42,18 +42,16 @@ class DiaryFragment : Fragment() {
             Toast.makeText(requireActivity(), "Load diary on $selectedDate", Toast.LENGTH_SHORT).show()
             }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
 
-        val diaryAdapter = DiaryAdapter(
-            data = FakeDataSource.dummyDiary,
-            onClickData = { Toast.makeText(requireActivity(), "${it.name} clicked", Toast.LENGTH_SHORT).show() },
-            onDeleteData = { Toast.makeText(requireActivity(), "${it.name} deleted", Toast.LENGTH_SHORT).show() },
-            onAddFood = { startActivity(Intent(requireActivity(), FoodActivity::class.java)) },
-            onAddExercises = {  startActivity(Intent(requireActivity(), ExerciseActivity::class.java)) }
-        )
-
-
         binding.tvDate.text = date
 
         binding.rvDiary.apply {
+            val diaryAdapter = DiaryAdapter(
+                data = FakeDataSource.dummyDiary,
+                onClickData = { Toast.makeText(requireActivity(), "${it.name} clicked", Toast.LENGTH_SHORT).show() },
+                onDeleteData = { Toast.makeText(requireActivity(), "${it.name} deleted", Toast.LENGTH_SHORT).show() },
+                onAddFood = { startActivity(Intent(requireActivity(), FoodActivity::class.java)) },
+                onAddExercises = {  startActivity(Intent(requireActivity(), ExerciseActivity::class.java)) }
+            )
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = diaryAdapter
         }

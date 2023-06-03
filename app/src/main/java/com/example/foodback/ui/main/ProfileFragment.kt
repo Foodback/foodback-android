@@ -16,7 +16,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.foodback.data.Result
 import com.example.foodback.databinding.FragmentProfileBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.auth.AuthViewModel
+import com.example.foodback.ui.login.LoginViewModel
 import com.example.foodback.ui.onboarding.OnBoardingActivity
 
 class ProfileFragment : Fragment() {
@@ -26,7 +26,7 @@ class ProfileFragment : Fragment() {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
-    private val authViewModel: AuthViewModel by activityViewModels {
+    private val loginViewModel: LoginViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireActivity().dataStore)
     }
 
@@ -38,9 +38,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.logout.setOnClickListener {
+        binding.btnLogout.setOnClickListener {
             Log.i("TEST", "onViewCreated: BTN CLICKED")
-            authViewModel.logout().observe(requireActivity()) { result ->
+            loginViewModel.logout().observe(requireActivity()) { result ->
                 when(result){
                     is Result.Loading -> {
                         binding.pbLogout.visibility = View.VISIBLE

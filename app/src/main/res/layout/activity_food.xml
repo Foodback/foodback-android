@@ -6,23 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".ui.food.FoodActivity">
 
-    <TextView
-        android:id="@+id/textView4"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_food"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="Search food..." />
+
+    <Button
+        android:id="@+id/btn_scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Food"
+        android:text="SCAN"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/search_food"
+        app:layout_constraintTop_toBottomOf="@+id/search_food" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_food"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_scan" />
 
-    <Button
-        android:id="@+id/btn_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CAMERA"
-        app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

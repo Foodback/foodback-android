@@ -1,7 +1,6 @@
 package com.example.foodback.ui.main
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -13,8 +12,7 @@ import androidx.fragment.app.commit
 import com.example.foodback.R
 import com.example.foodback.databinding.ActivityMainBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.auth.AuthViewModel
-import com.example.foodback.ui.onboarding.OnBoardingActivity
+import com.example.foodback.ui.login.LoginViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
-    private val authViewModel: AuthViewModel by viewModels {
+    private val loginViewModel: LoginViewModel by viewModels {
         ViewModelFactory.getInstance(dataStore)
     }
 
@@ -40,7 +38,9 @@ class MainActivity : AppCompatActivity() {
         _activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        authViewModel.isLogin().observe(this){
+        supportActionBar?.hide()
+
+//        loginViewModel.isLogin().observe(this){
 //            if(it == null){
 //                startActivity(Intent(this@MainActivity, OnBoardingActivity::class.java))
 //                finish()
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         if (fragment !is HomeFragment){
             mFragmentManager.commit {
-                add(R.id.frame_container, mHomeFragment, HomeFragment::class.java.simpleName)
+                add(R.id.frame_navBottom, mHomeFragment, HomeFragment::class.java.simpleName)
             }
         }
 
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToFragment(mFragment: Fragment){
         mFragmentManager.commit {
 //            addToBackStack(null)
-            replace(R.id.frame_container, mFragment, mFragment::class.java.simpleName)
+            replace(R.id.frame_navBottom, mFragment, mFragment::class.java.simpleName)
         }
     }
 

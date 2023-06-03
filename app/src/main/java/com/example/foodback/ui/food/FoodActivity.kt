@@ -3,20 +3,23 @@ package com.example.foodback.ui.food
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
-import com.example.foodback.R
-import com.example.foodback.databinding.ActivityDetailBinding
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.foodback.adapter.AddAdapter
+import com.example.foodback.data.FakeDataSource
 import com.example.foodback.databinding.ActivityFoodBinding
 import com.example.foodback.ui.scan.ScanActivity
 
 class FoodActivity : AppCompatActivity() {
 
-    private var _activitFoodBinding: ActivityFoodBinding? = null
-    private val binding get() = _activitFoodBinding!!
+    private var _activityFoodBinding: ActivityFoodBinding? = null
+    private val binding get() = _activityFoodBinding!!
 
     private val cameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
         if (isGranted) {
@@ -29,10 +32,39 @@ class FoodActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        _activitFoodBinding = ActivityFoodBinding.inflate(layoutInflater)
+        _activityFoodBinding = ActivityFoodBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnCamera.setOnClickListener {
+        supportActionBar?.hide()
+
+        binding.searchFood.apply {
+            setIconifiedByDefault(false)
+            setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    if(query != null){
+                        Toast.makeText(this@FoodActivity, "Searching $query", Toast.LENGTH_SHORT).show()
+                        binding.searchFood.clearFocus()
+                    }else{
+                        Toast.makeText(this@FoodActivity, "Reset search filter", Toast.LENGTH_SHORT).show()
+                        binding.searchFood.clearFocus()
+                    }
+                    return true
+                }
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
+                }
+            })
+        }
+
+        binding.rvFood.apply {
+            val addAdapter = AddAdapter(FakeDataSource.dummyAdd){Toast.makeText(this@FoodActivity, it.name, Toast.LENGTH_SHORT).show()}
+            val mLayoutManager = LinearLayoutManager(this@FoodActivity)
+            addItemDecoration(DividerItemDecoration(this@FoodActivity, mLayoutManager.orientation))
+            layoutManager = mLayoutManager
+            adapter = addAdapter
+        }
+
+        binding.btnScan.setOnClickListener {
             if (checkPermission(Manifest.permission.CAMERA))  startCameraX()
             else cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
         }
@@ -47,6 +79,6 @@ class FoodActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _activitFoodBinding = null
+        _activityFoodBinding = null
     }
 }

@@ -1,10 +1,10 @@
-package com.example.foodback.ui.auth
+package com.example.foodback.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.foodback.data.Repository
 
-class AuthViewModel(private val repository: Repository) : ViewModel() {
+class LoginViewModel(private val repository: Repository) : ViewModel() {
 
     fun isLogin() = repository.isLogin().asLiveData()
 
