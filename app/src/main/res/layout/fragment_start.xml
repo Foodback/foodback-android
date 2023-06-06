@@ -5,49 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_started"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SETTING UP PROFILE"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/tvMoveToLogin"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/angle_left_24" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="288dp"
+        android:layout_height="384dp"
+        android:src="@drawable/start_onboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMoveToLogin" />
 
-    <ImageButton
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="272dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:text="Before we begin, tell us something about yourself..."
+        android:textAlignment="center"
+        android:textColor="@color/second_text1"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gifImageView" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next_started"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="64dp"
-        android:background="@drawable/baseline_arrow_circle_right_24"
-        android:contentDescription="Button Next"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/bold"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/tv_have_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:text="Already have an account?"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_move_to_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_next_started" />
-
-    <TextView
-        android:id="@+id/tv_move_to_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="88dp"
-        android:fontFamily="@font/medium"
-        android:text="Sign In"
-        android:textColor="@color/primary_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_have_account"
-        app:layout_constraintTop_toBottomOf="@+id/btn_next_started" />
-
+    </androidx.appcompat.widget.AppCompatButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

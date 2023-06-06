@@ -1,24 +1,20 @@
 package com.example.foodback.ui.register
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.transition.Slide
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.commit
+import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
 import com.example.foodback.databinding.FragmentGoalBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.login.LoginActivity
 
 class GoalFragment : Fragment() {
 
@@ -42,60 +38,74 @@ class GoalFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setButton()
 
-        when(goal){
-            "Gain" -> { binding.cardGain.setCardBackgroundColor(requireActivity().getColor(R.color.green_400)) }
-            "Maintain" -> { binding.cardMaintain.setCardBackgroundColor(requireActivity().getColor(R.color.green_400)) }
-            "Loss" -> { binding.cardLoss.setCardBackgroundColor(requireActivity().getColor(R.color.green_400)) }
+        binding.weightGain.setOnClickListener {
+            goal = "gain"
+            binding.weightGain.isChecked = !binding.weightGain.isChecked
+            binding.weightLoss.isChecked = false
+            binding.calorieManage.isChecked = false
+            setColorBackground()
+            setButton()
         }
 
-        binding.cardGain.setOnClickListener {
-            goal = "Gain"
-            binding.cardGain.setCardBackgroundColor(requireActivity().getColor(R.color.green_400))
-            binding.cardMaintain.setCardBackgroundColor(requireActivity().getColor(R.color.white))
-            binding.cardLoss.setCardBackgroundColor(requireActivity().getColor(R.color.white))
+        binding.weightLoss.setOnClickListener {
+            goal = "loss"
+            binding.weightLoss.isChecked = !binding.weightLoss.isChecked
+            binding.weightGain.isChecked = false
+            binding.calorieManage.isChecked = false
+            setColorBackground()
+            setButton()
         }
 
-        binding.cardMaintain.setOnClickListener  {
-            goal = "Maintain"
-            binding.cardGain.setCardBackgroundColor(requireActivity().getColor(R.color.white))
-            binding.cardMaintain.setCardBackgroundColor(requireActivity().getColor(R.color.green_400))
-            binding.cardLoss.setCardBackgroundColor(requireActivity().getColor(R.color.white))
+        binding.calorieManage.setOnClickListener {
+            goal = "maintain"
+            binding.calorieManage.isChecked = !binding.weightLoss.isChecked
+            binding.weightGain.isChecked = false
+            binding.weightLoss.isChecked = false
+            setColorBackground()
+            setButton()
         }
 
-        binding.cardLoss.setOnClickListener  {
-            goal = "Loss"
-            binding.cardGain.setCardBackgroundColor(requireActivity().getColor(R.color.white))
-            binding.cardMaintain.setCardBackgroundColor(requireActivity().getColor(R.color.white))
-            binding.cardLoss.setCardBackgroundColor(requireActivity().getColor(R.color.green_400))
+        binding.btnNext.setOnClickListener {
+            registerViewModel.addData(GOAL_KEY, goal)
+            navigateFragment(2)
         }
 
-        binding.btnNextGoal.setOnClickListener {
-            if (goal.isEmpty()){
-                Toast.makeText(requireActivity(), "Please select your goal", Toast.LENGTH_SHORT).show()
-            }else{
-                registerViewModel.addData(GOAL_KEY, goal)
-                if(goal == "Maintain") navigateFragment(LevelFragment())
-                else navigateFragment(TargetFragment())
-            }
-        }
-
-        binding.tvMoveToLogin.setOnClickListener{
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
-            requireActivity().finish()
+        binding.ivBack.setOnClickListener {
+            navigateFragment(0)
         }
     }
 
-    fun navigateFragment(mFragment: Fragment) {
-        mFragment.apply {
-            enterTransition = Slide(Gravity.END)
-            exitTransition = Slide(Gravity.START)
-        }
-        val mFragmentManager = parentFragmentManager
-        mFragmentManager.commit {
-            addToBackStack(null)
-            replace(R.id.frame_register, mFragment, mFragment::class.java.simpleName)
-        }
+
+    private fun setColorBackground(){
+        val primaryColor = ContextCompat.getColor(requireContext(), R.color.primary)
+        val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
+        val textColor = ContextCompat.getColor(requireContext(), R.color.second_text2)
+
+
+        binding.weightLoss.setCardBackgroundColor(if (binding.weightLoss.isChecked) primaryColor else whiteColor)
+        binding.weightGain.setCardBackgroundColor(if (binding.weightGain.isChecked) primaryColor else whiteColor)
+        binding.calorieManage.setCardBackgroundColor(if (binding.calorieManage.isChecked) primaryColor else whiteColor)
+
+        binding.textWeightLoss.setTextColor(if (binding.weightLoss.isChecked) whiteColor else textColor)
+        binding.textWeightGain.setTextColor(if (binding.weightGain.isChecked) whiteColor else textColor)
+        binding.textCalorieManage.setTextColor(if (binding.calorieManage.isChecked) whiteColor else textColor)
+
+        binding.descWeightLoss.setTextColor(if (binding.weightLoss.isChecked) whiteColor else textColor)
+        binding.descWeightGain.setTextColor(if (binding.weightGain.isChecked) whiteColor else textColor)
+        binding.descCalorieManage.setTextColor(if (binding.calorieManage.isChecked) whiteColor else textColor)
+    }
+
+    private fun setButton(){
+        binding.btnNext.isEnabled = binding.weightGain.isChecked || binding.weightLoss.isChecked || binding.calorieManage.isChecked
+    }
+
+    private fun navigateFragment(fragmentIndex: Int) {
+        val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
+        val bundle = Bundle()
+        bundle.putString(GOAL_KEY, goal)
+        viewPager?.currentItem = fragmentIndex
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -109,6 +119,6 @@ class GoalFragment : Fragment() {
     }
 
     companion object{
-        private const val GOAL_KEY: String = "goal"
+        var GOAL_KEY: String = "goal"
     }
 }

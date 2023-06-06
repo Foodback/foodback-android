@@ -14,6 +14,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
 import com.example.foodback.databinding.FragmentTargetBinding
 import com.example.foodback.ui.ViewModelFactory
@@ -39,23 +40,15 @@ class TargetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnNextTarget.setOnClickListener {
-            registerViewModel.addData(TARGET_KEY, "target data")
-            val mLevelFragment = LevelFragment()
-            mLevelFragment.apply {
-                enterTransition = Slide(Gravity.END)
-                exitTransition = Slide(Gravity.START)
-            }
-            val mFragmentManager = parentFragmentManager
-            mFragmentManager.commit {
-                addToBackStack(null)
-                replace(R.id.frame_register, mLevelFragment, LevelFragment::class.java.simpleName)
-            }
+        val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
+
+        binding.ivBack.setOnClickListener {
+            viewPager?.currentItem = 3
         }
 
-        binding.tvMoveToLogin.setOnClickListener{
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
-            requireActivity().finish()
+        binding.btnNextTarget.setOnClickListener {
+            registerViewModel.addData(TARGET_KEY, "target data")
+            viewPager?.currentItem = 5
         }
     }
 
@@ -67,5 +60,4 @@ class TargetFragment : Fragment() {
     companion object{
         var TARGET_KEY = "target"
     }
-
 }

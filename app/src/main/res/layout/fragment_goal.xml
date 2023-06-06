@@ -5,195 +5,221 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_gain"
-        android:layout_width="match_parent"
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/angle_left_24" />
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="272dp"
         android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/card_maintain"
-        app:layout_constraintEnd_toEndOf="@+id/card_maintain"
-        app:layout_constraintStart_toStartOf="@+id/card_maintain">
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/semi_bold"
+        android:gravity="top"
+        android:text="What goal do you want to achieve?"
+        android:textColor="@color/second_text1"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBack" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp">
-
-            <ImageView
-                android:id="@+id/image_gain"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@drawable/gain_weight"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/image_gain"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/tv_gain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Weight Gain"
-                    app:layout_constraintStart_toEndOf="@+id/image_gain"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_desc_gain"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Desc GainGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
-                    app:layout_constraintStart_toStartOf="@+id/tv_gain"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_gain" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_maintain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_next_goal"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/weight_loss"
+        android:layout_width="345dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="32dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp"
+        app:checkedIconTint="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp">
+            android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/image_maintain"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@drawable/calories_manage"
+                android:id="@+id/image_weight_loss"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_marginStart="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/weight_loss" />
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/text_weight_loss"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/image_maintain"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/bold"
+                android:text="Weight Loss"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/image_weight_loss"
+                app:layout_constraintTop_toTopOf="@+id/image_weight_loss" />
 
-                <TextView
-                    android:id="@+id/tv_maintain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Weight Maintain"
-                    app:layout_constraintStart_toEndOf="@+id/image_maintain"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_desc_maintain"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Desc Maintainnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
-                    app:layout_constraintStart_toStartOf="@+id/tv_maintain"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_maintain" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/desc_weight_loss"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/medium"
+                android:text="The process of intentionally losing body weight"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_weight_loss"
+                app:layout_constraintStart_toEndOf="@+id/image_weight_loss" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_loss"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintEnd_toEndOf="@id/card_maintain"
-        app:layout_constraintStart_toStartOf="@id/card_maintain"
-        app:layout_constraintTop_toBottomOf="@+id/card_maintain">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/weight_gain"
+        android:layout_width="345dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="24dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp"
+        app:checkedIconTint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weight_loss">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp">
+            android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/image_loss"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@drawable/weight_loss"
+                android:id="@+id/image_weight_gain"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_marginStart="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gain_weight" />
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/text_weight_gain"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/image_loss"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/bold"
+                android:text="Weight gain"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/image_weight_gain"
+                app:layout_constraintTop_toTopOf="@+id/image_weight_gain" />
 
-                <TextView
-                    android:id="@+id/tv_loss"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Weight Loss"
-                    app:layout_constraintStart_toEndOf="@+id/image_loss"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_desc_loss"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Desc Losssssssssssssssssssssssssssssssssssssssssssssssss"
-                    app:layout_constraintStart_toStartOf="@+id/tv_loss"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_loss" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/desc_weight_gain"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/medium"
+                android:text="The process of gaining additional body weight"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_weight_gain"
+                app:layout_constraintStart_toEndOf="@+id/image_weight_gain" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <ImageButton
-        android:id="@+id/btn_next_goal"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="64dp"
-        android:background="@drawable/baseline_arrow_circle_right_24"
-        android:contentDescription="Button Next"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/calorie_manage"
+        android:layout_width="345dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="24dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp"
+        app:checkedIconTint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weight_gain">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_calorie_manage"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/calories_manage" />
+
+            <TextView
+                android:id="@+id/text_calorie_manage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/bold"
+                android:text="Calorie management"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/image_calorie_manage"
+                app:layout_constraintTop_toTopOf="@+id/image_calorie_manage" />
+
+            <TextView
+                android:id="@+id/desc_calorie_manage"
+                android:layout_width="199dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/medium"
+                android:text="The practice of controlling number of calories consumed"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_calorie_manage"
+                app:layout_constraintStart_toEndOf="@+id/image_calorie_manage" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/bold"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+    </androidx.appcompat.widget.AppCompatButton>
 
     <TextView
-        android:id="@+id/tv_have_account"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:text="Already have an account?"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_move_to_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_next_goal" />
-
-    <TextView
-        android:id="@+id/tv_move_to_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="88dp"
         android:fontFamily="@font/medium"
-        android:text="Sign In"
-        android:textColor="@color/primary_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_have_account"
-        app:layout_constraintTop_toBottomOf="@+id/btn_next_goal" />
+        android:text="Please choose one of the options"
+        android:textColor="@color/second_text2"
+        app:layout_constraintStart_toStartOf="@+id/welcome"
+        app:layout_constraintTop_toBottomOf="@+id/welcome" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

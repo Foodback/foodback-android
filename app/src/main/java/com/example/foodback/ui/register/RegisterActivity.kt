@@ -8,8 +8,6 @@ import androidx.activity.viewModels
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.fragment.app.commit
-import com.example.foodback.R
 import com.example.foodback.databinding.ActivityRegisterBinding
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.login.LoginActivity
@@ -19,16 +17,6 @@ class RegisterActivity : AppCompatActivity() {
     private var _activityRegisterBinding: ActivityRegisterBinding? = null
     private val binding get() = _activityRegisterBinding!!
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
-
-    private val registerViewModel: RegisterViewModel by viewModels {
-        ViewModelFactory.getInstance(dataStore)
-    }
-
-    private val mFragmentManager = supportFragmentManager
-    private val mStartFragment = StartFragment()
-    private val fragment = mFragmentManager.findFragmentByTag(StartFragment::class.java.simpleName)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,22 +24,34 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
-
         setupAction()
-        playAnimation()
     }
 
     private fun setupAction(){
+        val fragmentList = arrayListOf(
+            StartFragment(),
+            GoalFragment(),
+            GenderFragment(),
+            CurrentFragment(),
+            TargetFragment(),
+            LevelFragment(),
+            RegisterFragment()
+        )
 
-        if (fragment !is StartFragment){
-            mFragmentManager.commit {
-                add(R.id.frame_register, mStartFragment, StartFragment::class.java.simpleName)
-            }
+        val adapter = ViewPagerAdapter(
+            fragmentList,
+            supportFragmentManager,
+            lifecycle
+        )
+
+        binding.viewPager.adapter = adapter
+        binding.dotsIndicator.attachTo(binding.viewPager)
+        binding.viewPager.isUserInputEnabled = false
+
+        binding.tvMoveToLogin.setOnClickListener{
+            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+            finish()
         }
-    }
-
-    private fun playAnimation(){
-
     }
 
     override fun onDestroy() {

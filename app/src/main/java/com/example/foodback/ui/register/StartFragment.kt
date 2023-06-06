@@ -14,21 +14,17 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
 import com.example.foodback.databinding.FragmentStartBinding
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.login.LoginActivity
+import com.example.foodback.ui.onboarding.OnBoardingActivity
 
-class StartFragment : Fragment() {
+class   StartFragment : Fragment() {
 
     private var _binding: FragmentStartBinding? = null
     private val binding get() = _binding!!
-
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
-
-    private val registerViewModel: RegisterViewModel by activityViewModels {
-        ViewModelFactory.getInstance(requireActivity().dataStore)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -38,22 +34,12 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
         binding.btnNextStarted.setOnClickListener {
-            val mGoalFragment = GoalFragment()
-            mGoalFragment.apply {
-                enterTransition = Slide(Gravity.END)
-                exitTransition = Slide(Gravity.START)
-            }
-            val mFragmentManager = parentFragmentManager
-            mFragmentManager.commit {
-                addToBackStack(null)
-                replace(R.id.frame_register, mGoalFragment, GoalFragment::class.java.simpleName)
-            }
+            viewPager?.currentItem = 1
         }
-
         binding.tvMoveToLogin.setOnClickListener{
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            startActivity(Intent(requireActivity(), OnBoardingActivity::class.java))
             requireActivity().finish()
         }
     }

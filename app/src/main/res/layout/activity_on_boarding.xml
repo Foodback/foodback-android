@@ -6,54 +6,87 @@
     android:layout_height="match_parent"
     tools:context=".ui.onboarding.OnBoardingActivity">
 
+
     <ImageView
-        android:id="@+id/iv_logo"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="64dp"
-        android:src="@drawable/logo"
+        android:id="@+id/imageView5"
+        android:layout_width="1203dp"
+        android:layout_height="1304dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.642"
+        app:srcCompat="@drawable/bg_onboard" />
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="280dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/bold"
+        android:gravity="top"
+        android:text="Welcome to"
+        android:textColor="@color/black"
+        android:textSize="45sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_onboarding1"
-        android:layout_width="wrap_content"
+        android:id="@+id/foodbck"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="64dp"
-        android:text="Welcome to Foodback"
-        android:textSize="24sp"
+        android:layout_marginStart="32dp"
+        android:fontFamily="@font/semi_bold"
+        android:gravity="top"
+        android:text="Feedback on your food choices, anytime, anywhere."
+        android:textColor="@color/second_text1"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/foodbck2" />
 
     <TextView
-        android:id="@+id/tv_onboarding2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
-        app:layout_constraintStart_toStartOf="@+id/tv_onboarding1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_onboarding1" />
-
-    <Button
-        android:id="@+id/btn_move_register"
+        android:id="@+id/foodbck2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="REGISTER"
-        app:layout_constraintEnd_toStartOf="@+id/btn_move_login"
+        android:layout_marginStart="32dp"
+        android:fontFamily="@font/bold"
+        android:gravity="top"
+        android:text="Foodback"
+        android:textColor="@color/primary_text"
+        android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_onboarding2" />
+        app:layout_constraintTop_toBottomOf="@+id/welcome" />
 
-    <Button
-        android:id="@+id/btn_move_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="LOGIN"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnMoveLogin"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/bold"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnMoveRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_move_register"
-        app:layout_constraintTop_toBottomOf="@+id/tv_onboarding2" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnMoveRegister"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/button2"
+        android:fontFamily="@font/bold"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:textColor="@color/primary"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

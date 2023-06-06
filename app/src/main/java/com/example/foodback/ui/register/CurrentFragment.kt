@@ -4,22 +4,25 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.transition.Slide
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
 import com.example.foodback.databinding.FragmentCurrentBinding
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.login.LoginActivity
 
-class CurrentFragment : Fragment() {
+class CurrentFragment() : Fragment() {
 
     private var _binding: FragmentCurrentBinding? = null
     private val binding get() = _binding!!
@@ -30,6 +33,10 @@ class CurrentFragment : Fragment() {
         ViewModelFactory.getInstance(requireActivity().dataStore)
     }
 
+    private var weight: String = ""
+
+    private var height: String = ""
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _binding = FragmentCurrentBinding.inflate(inflater, container, false)
@@ -39,25 +46,37 @@ class CurrentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val height = binding.edHeight.text.toString().trim()
+        val weight = binding.edWeight.text.toString()
         binding.btnNextCurrent.setOnClickListener {
-            registerViewModel.addData("height", "height data")
-            registerViewModel.addData("weight", "weight data")
-            val mRegisterFragment = RegisterFragment()
-            mRegisterFragment.apply {
-                enterTransition = Slide(Gravity.END)
-                exitTransition = Slide(Gravity.START)
-            }
-            val mFragmentManager = parentFragmentManager
-            mFragmentManager.commit {
-                addToBackStack(null)
-                replace(R.id.frame_register, mRegisterFragment, RegisterFragment::class.java.simpleName)
+            registerViewModel.addData(EXTRA_HEIGHT, height)
+            registerViewModel.addData(EXTRA_WEIGHT, weight)
+            val goal: String? = registerViewModel.data[GOAL_KEY]
+            if (goal == "maintain") {
+                navigateFragment(5)
+            } else {
+                navigateFragment(4)
             }
         }
 
-        binding.tvMoveToLogin.setOnClickListener{
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
-            requireActivity().finish()
+        binding.ivBack.setOnClickListener {
+            navigateFragment(2)
         }
+    }
+
+    private fun navigateFragment(fragmentIndex: Int) {
+        val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
+        viewPager?.currentItem = fragmentIndex
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(EXTRA_HEIGHT, height)
+        outState.putString(EXTRA_WEIGHT, weight)
+    }
+
+    private fun setButton(){
+
     }
 
     override fun onDestroy() {
@@ -66,8 +85,8 @@ class CurrentFragment : Fragment() {
     }
 
     companion object{
-        var EXTRA_HEIGHT = "extra_height"
+        var EXTRA_HEIGHT = "height"
         var EXTRA_WEIGHT = "extra_weight"
+        var GOAL_KEY = "goal"
     }
-
 }

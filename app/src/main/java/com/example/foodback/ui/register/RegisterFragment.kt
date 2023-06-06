@@ -13,11 +13,13 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.activityViewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
 import com.example.foodback.data.Result
 import com.example.foodback.databinding.FragmentRegisterBinding
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.login.LoginActivity
+import kotlin.math.log
 
 class RegisterFragment : Fragment() {
 
@@ -38,6 +40,11 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.ivBack.setOnClickListener {
+            val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
+            viewPager?.currentItem = 5
+        }
 
         binding.btnRegister.setOnClickListener {
             val email = binding.edEmailRegister.text.toString().trim()
@@ -63,16 +70,10 @@ class RegisterFragment : Fragment() {
                 }
             }
         }
-
-        binding.tvMoveToLogin.setOnClickListener{
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
-            requireActivity().finish()
-        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
-
 }
