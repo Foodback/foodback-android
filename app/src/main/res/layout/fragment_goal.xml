@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/angle_left_24" />
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="272dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/semi_bold"
+        android:gravity="top"
+        android:text="What goal do you want to achieve?"
+        android:textColor="@color/second_text1"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBack" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/weight_loss"
+        android:layout_width="345dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="32dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp"
+        app:checkedIconTint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_weight_loss"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/weight_loss" />
+
+            <TextView
+                android:id="@+id/text_weight_loss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/bold"
+                android:text="Weight Loss"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/image_weight_loss"
+                app:layout_constraintTop_toTopOf="@+id/image_weight_loss" />
+
+            <TextView
+                android:id="@+id/desc_weight_loss"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/medium"
+                android:text="The process of intentionally losing body weight"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_weight_loss"
+                app:layout_constraintStart_toEndOf="@+id/image_weight_loss" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/weight_gain"
+        android:layout_width="345dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="24dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp"
+        app:checkedIconTint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weight_loss">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_weight_gain"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gain_weight" />
+
+            <TextView
+                android:id="@+id/text_weight_gain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/bold"
+                android:text="Weight gain"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/image_weight_gain"
+                app:layout_constraintTop_toTopOf="@+id/image_weight_gain" />
+
+            <TextView
+                android:id="@+id/desc_weight_gain"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/medium"
+                android:text="The process of gaining additional body weight"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_weight_gain"
+                app:layout_constraintStart_toEndOf="@+id/image_weight_gain" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/calorie_manage"
+        android:layout_width="345dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="24dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp"
+        app:checkedIconTint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weight_gain">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_calorie_manage"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/calories_manage" />
+
+            <TextView
+                android:id="@+id/text_calorie_manage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/bold"
+                android:text="Calorie management"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/image_calorie_manage"
+                app:layout_constraintTop_toTopOf="@+id/image_calorie_manage" />
+
+            <TextView
+                android:id="@+id/desc_calorie_manage"
+                android:layout_width="199dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/medium"
+                android:text="The practice of controlling number of calories consumed"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/image_calorie_manage"
+                app:layout_constraintStart_toEndOf="@+id/image_calorie_manage" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/bold"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/medium"
+        android:text="Please choose one of the options"
+        android:textColor="@color/second_text2"
+        app:layout_constraintStart_toStartOf="@+id/welcome"
+        app:layout_constraintTop_toBottomOf="@+id/welcome" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

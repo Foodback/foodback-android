@@ -6,21 +6,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.foodback.R
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.auth.AuthViewModel
-import com.example.foodback.ui.home.HomeActivity
+import com.example.foodback.ui.login.LoginViewModel
+import com.example.foodback.ui.main.MainActivity
 import com.example.foodback.ui.onboarding.OnBoardingActivity
 
 class SplashActivity : AppCompatActivity() {
 
     private val handler = Handler(Looper.getMainLooper())
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
-    private val authViewModel: AuthViewModel by viewModels {
+    private val loginViewModel: LoginViewModel by viewModels {
         ViewModelFactory.getInstance(dataStore)
     }
 
@@ -34,9 +35,9 @@ class SplashActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         handler.postDelayed({
-            authViewModel.isLogin().observe(this){
-                if(!it.isNullOrEmpty()){
-                    startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
+            loginViewModel.isLogin().observe(this){
+                if(it != null){
+                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                 }else{
                     startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
                 }
@@ -51,6 +52,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     companion object{
-        private const val DELAY_TIME: Long = 1000
+        private const val DELAY_TIME: Long = 3000
     }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "193317034512",
+    "project_id": "foodback-ef241",
+    "storage_bucket": "foodback-ef241.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193317034512:android:be0032eafe64cbfe27c895",
+        "android_client_info": {
+          "package_name": "com.example.foodback"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgvaQw_ZjdAxrgnpF-LLo09ScJXJ98x8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
