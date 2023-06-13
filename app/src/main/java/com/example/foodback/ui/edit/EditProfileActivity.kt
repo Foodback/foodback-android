@@ -31,15 +31,17 @@ class EditProfileActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(dataStore)
     }
 
-    private lateinit var gender: String
-    private lateinit var activity: String
-    private lateinit var goal: String
+    private var gender = ""
+    private var activity = ""
+    private var goal = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         _activityEditProfileBinding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
 
         val profileData = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(EXTRA_PROFILE_DATA, ProfileData::class.java)
@@ -87,27 +89,34 @@ class EditProfileActivity : AppCompatActivity() {
         binding.btnSaveEdit.setOnClickListener {
             val name = binding.edUsernameEdit.text.toString().trim()
             val email =  binding.edEmailEdit.text.toString().trim()
-            val height: Long = binding.edHeightEdit.text.toString().trim().toLong()
-            val weight: Long = binding.edWeightEdit.text.toString().trim().toLong()
-            val target: Long = binding.edTargetEdit.text.toString().trim().toLong()
-            editProfileViewModel.editProfile(name, email, gender, height, weight, activity, goal, target).observe(this){ result ->
-                when(result){
-                    is Result.Loading ->{
-                        binding.pbEditProfile.visibility = View.VISIBLE
-                    }
-                    is Result.Success ->{
-                        binding.pbEditProfile.visibility = View.GONE
-                        Toast.makeText(this@EditProfileActivity, result.data.message, Toast.LENGTH_SHORT).show()
-                        setResult(ProfileFragment.RESULT_OK, Intent())
-                        finish()
-                    }
-                    is Result.Error ->{
-                        binding.pbEditProfile.visibility = View.GONE
-                        Toast.makeText(this@EditProfileActivity, result.error, Toast.LENGTH_SHORT).show()
+            val height  = binding.edHeightEdit.text.toString().trim()
+            val weight = binding.edWeightEdit.text.toString().trim()
+            val target = binding.edTargetEdit.text.toString().trim()
+            if(name .isNotBlank() && email.isNotBlank() && gender.isNotBlank() && height.isNotBlank() && weight.isNotBlank() && activity.isNotBlank() && goal.isNotBlank() && target.isNotBlank()){
+                editProfileViewModel.editProfile(name, email, gender, height.toLong(), weight.toLong(), activity, goal, target.toLong()).observe(this){ result ->
+                    when(result){
+                        is Result.Loading ->{
+                            binding.pbEditProfile.visibility = View.VISIBLE
+                        }
+                        is Result.Success ->{
+                            binding.pbEditProfile.visibility = View.GONE
+                            Toast.makeText(this@EditProfileActivity, result.data.message, Toast.LENGTH_SHORT).show()
+                            setResult(ProfileFragment.RESULT_OK, Intent())
+                            finish()
+                        }
+                        is Result.Error ->{
+                            binding.pbEditProfile.visibility = View.GONE
+                            Toast.makeText(this@EditProfileActivity, result.error, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
+            }else{
+                Toast.makeText(this@EditProfileActivity, "Can't be blank", Toast.LENGTH_SHORT).show()
             }
+
         }
+
+        binding.ivBack.setOnClickListener { finish() }
     }
 
     override fun onDestroy() {

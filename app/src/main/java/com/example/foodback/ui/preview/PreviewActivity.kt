@@ -37,6 +37,9 @@ class PreviewActivity : AppCompatActivity() {
 
     private lateinit var labels: List<String>
 
+    private lateinit var label: String
+    private lateinit var date: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,13 +50,15 @@ class PreviewActivity : AppCompatActivity() {
         labels = application.assets.open("class.txt").bufferedReader().readLines()
 
         val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getSerializableExtra("picture", File::class.java)
+            intent.getSerializableExtra(EXTRA_PICTURE, File::class.java)
         } else {
             @Suppress("DEPRECATION")
-            intent.getSerializableExtra("picture")
+            intent.getSerializableExtra(EXTRA_PICTURE)
         } as? File
-        val isBackCamera = intent.getBooleanExtra("isBackCamera", true)
-        val gallery = intent.getStringExtra("gallery")
+        label = intent.getStringExtra(EXTRA_LABEL)?: ""
+        date = intent.getStringExtra(EXTRA_DATE)?: ""
+        val isBackCamera = intent.getBooleanExtra(EXTRA_IS_BACK_CAMERA, true)
+        val gallery = intent.getStringExtra(EXTRA_GALLERY)
         val galleryUri: Uri? = if(gallery != null) Uri.parse(gallery) else null
 
         myFile?.let { file ->
@@ -70,6 +75,8 @@ class PreviewActivity : AppCompatActivity() {
             if (getFile != null) {
                 val output = outputGenerator(BitmapFactory.decodeFile(getFile!!.path))
                 val intent = Intent(this@PreviewActivity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_LABEL, label)
+                intent.putExtra(DetailActivity.EXTRA_DATE, date)
                 intent.putExtra(DetailActivity.EXTRA_OUTPUT, output)
                 startActivity(intent)
                 finish()
@@ -121,5 +128,13 @@ class PreviewActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _activityPreviewBinding = null
+    }
+
+    companion object{
+        const val EXTRA_LABEL = "extra_label"
+        const val EXTRA_DATE = "extra_date"
+        const val EXTRA_PICTURE = "extra_picture"
+        const val EXTRA_GALLERY = "extra_gallery"
+        const val EXTRA_IS_BACK_CAMERA = "extra_isBackCamera"
     }
 }

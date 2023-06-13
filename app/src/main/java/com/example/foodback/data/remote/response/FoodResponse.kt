@@ -49,8 +49,8 @@ data class MenuItems (
 //    @field:SerializedName("breadcrumbs")
 //    val breadcrumbs: String,
 
-//    @field:SerializedName("image")
-//    val image: String,
+    @field:SerializedName("image")
+    val image: String,
 
 //    @field:SerializedName("imageType")
 //    val imageType: String,

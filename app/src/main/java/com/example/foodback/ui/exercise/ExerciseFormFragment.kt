@@ -45,28 +45,33 @@ class ExerciseFormFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnAddForm.setOnClickListener {
-            val name = binding.edFormName.text.toString()
-            val calories = binding.edFormCalorie.text.toString().toLong()
-            val duration = binding.edFormDuration.text.toString().toLong()
-            val sets = binding.edFormRepetition.text.toString().toLong()
-            val repetition= binding.edFormCalorie.text.toString().toLong()
-            exerciseViewModel.addExercise(name, calories, duration, sets, repetition, exerciseViewModel.date).observe(viewLifecycleOwner){ result ->
-                when(result){
-                    is Result.Loading ->{
-                        binding.pbFormExercise.visibility = View.VISIBLE
-                    }
-                    is Result.Success ->{
-                        binding.pbFormExercise.visibility = View.GONE
-                        Toast.makeText(requireActivity(), result.data.message, Toast.LENGTH_SHORT).show()
-                        requireActivity().setResult(DiaryFragment.RESULT_OK, Intent())
-                        requireActivity().finish()
-                    }
-                    is Result.Error ->{
-                        binding.pbFormExercise.visibility = View.GONE
-                        Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
+            val name = binding.edFormName.text.toString().trim()
+            val calories = binding.edFormCalorie.text.toString().trim()
+            val duration = binding.edFormDuration.text.toString().trim()
+            val sets = binding.edFormRepetition.text.toString().trim()
+            val repetition= binding.edFormCalorie.text.toString().trim()
+            if(name.isNotBlank() && calories.isNotBlank() && duration.isNotBlank() && sets.isNotBlank() && repetition.isNotBlank()){
+                exerciseViewModel.addExercise(name, calories.toLong(), duration.toLong(), sets.toLong(), repetition.toLong(), exerciseViewModel.date).observe(viewLifecycleOwner){ result ->
+                    when(result){
+                        is Result.Loading ->{
+                            binding.pbFormExercise.visibility = View.VISIBLE
+                        }
+                        is Result.Success ->{
+                            binding.pbFormExercise.visibility = View.GONE
+                            Toast.makeText(requireActivity(), result.data.message, Toast.LENGTH_SHORT).show()
+                            requireActivity().setResult(DiaryFragment.RESULT_OK, Intent())
+                            requireActivity().finish()
+                        }
+                        is Result.Error ->{
+                            binding.pbFormExercise.visibility = View.GONE
+                            Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
+            }else{
+                Toast.makeText(requireActivity(), "Can't be blank", Toast.LENGTH_SHORT).show()
             }
+
         }
 
     }

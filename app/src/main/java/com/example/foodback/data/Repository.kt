@@ -1,6 +1,7 @@
 package com.example.foodback.data
 
 import android.util.Log
+import com.example.foodback.R
 import com.example.foodback.data.local.AuthPreferences
 import com.example.foodback.data.remote.response.DataExercise
 import com.example.foodback.data.remote.response.DataMeal
@@ -39,6 +40,7 @@ class Repository private constructor(private val apiService: ApiService, private
     fun register(email: String, password: String, data: Map<String, String>) = flow{
         emit(Result.Loading)
         try {
+            val target = data[TARGET_KEY]?.toLong()
             val result = apiService.addProfile(
                 name = data[NAME_KEY]!!,
                 email = email,
@@ -47,7 +49,7 @@ class Repository private constructor(private val apiService: ApiService, private
                 weight = 55,
                 activity = data[LEVEL_KEY]!!,
                 goal = data[GOAL_KEY]!!,
-                target = data[TARGET_KEY]!!.toLong(),
+                target = target?:0,
             )
             auth.createUserWithEmailAndPassword(email, password).await()
             emit(Result.Success(result))
@@ -94,19 +96,19 @@ class Repository private constructor(private val apiService: ApiService, private
 
     private fun setData(dataBreakfast: DataMeal?, dataLunch: DataMeal?, dataDinner: DataMeal?, dataExercise: DataExercise?): List<Any> {
         val adapter = mutableListOf<Any>()
-        adapter.add("Breakfast: ${dataBreakfast?.totalCalories?:0}")
+        adapter.add(DiaryType(dataBreakfast?.totalCalories?:0,"Breakfast", R.drawable.sunrise))
         dataBreakfast?.listMeals?.forEach{ adapter.add(it) }
         adapter.add(AddButton(true, "Add Breakfast", "Breakfast"))
 
-        adapter.add("Lunch: ${dataLunch?.totalCalories?:0}")
+        adapter.add(DiaryType(dataLunch?.totalCalories?:0,"Lunch",R.drawable.sun))
         dataLunch?.listMeals?.forEach{ adapter.add(it) }
         adapter.add(AddButton(true, "Add Lunch", "Lunch"))
 
-        adapter.add("Dinner: ${dataDinner?.totalCalories?:0}")
+        adapter.add(DiaryType(dataDinner?.totalCalories?:0,"Dinner",R.drawable.moon))
         dataDinner?.listMeals?.forEach{ adapter.add(it) }
         adapter.add(AddButton(true, "Add Dinner", "Dinner"))
 
-        adapter.add("Exercise: ${dataExercise?.totalCalories?:0}")
+        adapter.add(DiaryType(dataExercise?.totalCalories?:0,"Exercise",R.drawable.exercise))
         dataExercise?.listExercises?.forEach{ adapter.add(it) }
         adapter.add(AddButton(false, "Add Exercise", "Exercise"))
         return adapter

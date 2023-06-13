@@ -1,17 +1,13 @@
 package com.example.foodback.data
 
-data class FakeData(
-    val name: String,
-    val desc: String,
-)
-
 data class AddButton(
     val isFood: Boolean,
     val hint: String,
     val label: String,
 )
 
-data class FakeAddData(
+data class DiaryType(
+    val calorie: Long,
     val name: String,
-    val desc: String,
+    val image: Int
 )

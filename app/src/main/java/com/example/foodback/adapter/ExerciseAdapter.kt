@@ -16,7 +16,7 @@ class ExerciseAdapter(private val listExercise: List<ExerciseData>, private val 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvAddFoodName.text = listExercise[holder.adapterPosition].name
-        holder.binding.tvAddFoodDesc.text = listExercise[holder.adapterPosition].total_calories.toString()
+        holder.binding.tvAddFoodDesc.text = "${listExercise[holder.adapterPosition].total_calories} cal per hour"
 
         holder.itemView.setOnClickListener {
             onClick(listExercise[holder.adapterPosition])

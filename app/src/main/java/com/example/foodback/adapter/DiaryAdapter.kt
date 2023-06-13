@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodback.data.AddButton
+import com.example.foodback.data.DiaryType
 import com.example.foodback.data.remote.response.Exercise
 import com.example.foodback.data.remote.response.Meal
 import com.example.foodback.databinding.ItemButtonBinding
@@ -13,15 +14,18 @@ import com.example.foodback.databinding.ItemTypeBinding
 class DiaryAdapter(private val data: List<Any>, private val onClickData: (Any) -> Unit, private val  onDeleteData: (Any) -> Unit, private val onAddFood: (String) -> Unit, private val onAddExercises: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class TypeViewHolder(var binding: ItemTypeBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(type: String){
-            binding.itemType.text = type
+        fun bind(type: DiaryType){
+            binding.itemTypeCalorie.text = "${type.calorie} Cal"
+            binding.imgType.setImageResource(type.image)
+            binding.itemType.text = type.name
         }
     }
 
     inner class FoodViewHolder(var binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(data: Meal){
-            binding.tvName.text = data.name
-            binding.tvDecs.text = data.calories.toString()
+            binding.tvNameList.text = data.name
+            binding.tvDescList.text = "${data.amount} Gram"
+            binding.tvCalorieList.text = "${data.calories} Cal"
 //            binding.btnRemove.setOnClickListener { onDeleteData(data) }
             this.itemView.setOnClickListener { onClickData(data) }
         }
@@ -29,8 +33,9 @@ class DiaryAdapter(private val data: List<Any>, private val onClickData: (Any) -
 
     inner class ExerciseViewHolder(var binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(data: Exercise){
-            binding.tvName.text = data.name
-            binding.tvDecs.text = data.calories.toString()
+            binding.tvNameList.text = data.name
+            binding.tvDescList.text = "${data.duration} Minute"
+            binding.tvCalorieList.text = "${data.calories} Cal"
 //            binding.btnRemove.setOnClickListener { onDeleteData(data) }
             this.itemView.setOnClickListener { onClickData(data) }
         }
@@ -46,7 +51,7 @@ class DiaryAdapter(private val data: List<Any>, private val onClickData: (Any) -
 
     override fun getItemViewType(position: Int): Int {
         return when (data[position]) {
-            is String -> ITEM_TYPE
+            is DiaryType -> ITEM_TYPE
             is Meal -> ITEM_FOOD
             is Exercise -> ITEM_EXERCISE
             is AddButton -> ITEM_BUTTON
@@ -69,7 +74,7 @@ class DiaryAdapter(private val data: List<Any>, private val onClickData: (Any) -
         when(holder.itemViewType){
             ITEM_TYPE -> {
                 val typeHolder = holder as TypeViewHolder
-                typeHolder.bind(data[position] as String)
+                typeHolder.bind(data[position] as DiaryType)
             }
             ITEM_FOOD -> {
                 val dataHolder = holder as FoodViewHolder

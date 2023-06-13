@@ -40,7 +40,6 @@ class FoodFormFragment : Fragment() {
         ViewModelFactory.getInstance(requireActivity().dataStore)
     }
 
-    private var date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _fragmentFoodFormBinding = FragmentFoodFormBinding.inflate(inflater, container, false)
@@ -59,27 +58,32 @@ class FoodFormFragment : Fragment() {
         }
 
         binding.btnAddForm.setOnClickListener {
-            val name = binding.edFormName.text.toString()
-            val amount = binding.edFormAmount.text.toString().toLong()
-            val calories = binding.edFormCalories.text.toString().toLong()
-            foodViewModel.addMeal(foodViewModel.label, name, amount, calories, foodViewModel.date).observe(requireActivity()){ result ->
-                when(result){
-                    is Result.Loading ->{
-                        binding.pbFormFood.visibility = View.VISIBLE
-                    }
-                    is Result.Success ->{
-                        binding.pbFormFood.visibility = View.GONE
-                        Toast.makeText(requireActivity(), result.data.message, Toast.LENGTH_SHORT).show()
-                        requireActivity().setResult(DiaryFragment.RESULT_OK, Intent())
-                        requireActivity().finish()
-                    }
-                    is Result.Error ->{
-                        binding.pbFormFood.visibility = View.GONE
-                        Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
+            val name = binding.edFormName.text.toString().trim()
+            val amount = binding.edFormAmount.text.toString().trim()
+            val calories = binding.edFormCalories.text.toString().trim()
+            if(amount.isNotBlank() && amount.isNotBlank() && calories.isNotBlank()){
+                foodViewModel.addMeal(foodViewModel.label, name, amount.toLong(), calories.toLong(), foodViewModel.date).observe(requireActivity()){ result ->
+                    when(result){
+                        is Result.Loading ->{
+                            binding.pbFormFood.visibility = View.VISIBLE
+                        }
+                        is Result.Success ->{
+                            binding.pbFormFood.visibility = View.GONE
+                            Toast.makeText(requireActivity(), result.data.message, Toast.LENGTH_SHORT).show()
+                            requireActivity().setResult(DiaryFragment.RESULT_OK, Intent())
+                            requireActivity().finish()
+                        }
+                        is Result.Error ->{
+                            binding.pbFormFood.visibility = View.GONE
+                            Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
+            }else{
+                Toast.makeText(requireActivity(), "Can't be blank", Toast.LENGTH_SHORT).show()
             }
         }
+
 
         binding.btnScanForm.setOnClickListener {
             if (checkPermission(Manifest.permission.CAMERA))  startCameraX()
@@ -90,7 +94,10 @@ class FoodFormFragment : Fragment() {
     private fun checkPermission(permission: String) = ContextCompat.checkSelfPermission(requireActivity(), permission) == PackageManager.PERMISSION_GRANTED
 
     private fun startCameraX() {
-        startActivity(Intent(requireActivity(), ScanActivity::class.java))
+        val intent = Intent(requireActivity(), ScanActivity::class.java)
+        intent.putExtra(ScanActivity.EXTRA_LABEL, foodViewModel.label)
+        intent.putExtra(ScanActivity.EXTRA_DATE, foodViewModel.date)
+        startActivity(intent)
         requireActivity().finish()
     }
 

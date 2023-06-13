@@ -1,43 +1,21 @@
 package com.example.foodback.ui.food
 
-import android.Manifest
 import android.app.SearchManager
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodback.R
-import com.example.foodback.adapter.ExerciseAdapter
-import com.example.foodback.adapter.FoodAdapter
-import com.example.foodback.data.FakeDataSource
-import com.example.foodback.data.Result
-import com.example.foodback.data.remote.response.ProfileData
 import com.example.foodback.databinding.ActivityFoodBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.edit.EditProfileActivity
-import com.example.foodback.ui.exercise.ExerciseFormFragment
-import com.example.foodback.ui.exercise.ExerciseSearchFragment
-import com.example.foodback.ui.exercise.ExerciseViewModel
-import com.example.foodback.ui.main.HomeFragment
-import com.example.foodback.ui.scan.ScanActivity
 
 class FoodActivity : AppCompatActivity() {
 

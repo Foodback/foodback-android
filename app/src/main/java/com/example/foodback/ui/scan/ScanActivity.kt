@@ -33,14 +33,19 @@ class ScanActivity : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
+    private lateinit var label: String
+    private lateinit var date: String
+
     private val launcherIntentGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedImg = result.data?.data as Uri
             selectedImg.let { uri ->
                 val myFile = uriToFile(uri, this@ScanActivity)
                 val intent = Intent(this@ScanActivity, PreviewActivity::class.java)
-                intent.putExtra("picture", myFile)
-                intent.putExtra("gallery", uri.toString())
+                intent.putExtra(PreviewActivity.EXTRA_LABEL, label)
+                intent.putExtra(PreviewActivity.EXTRA_DATE, date)
+                intent.putExtra(PreviewActivity.EXTRA_PICTURE, myFile)
+                intent.putExtra(PreviewActivity.EXTRA_GALLERY, uri.toString())
                 startActivity(intent)
                 finish()
             }
@@ -54,6 +59,9 @@ class ScanActivity : AppCompatActivity() {
 
         _activityScanBinding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        label = intent.getStringExtra(EXTRA_LABEL)?:""
+        date = intent.getStringExtra(EXTRA_DATE)?:""
 
         binding.captureImage.setOnClickListener { takePhoto() }
         binding.switchCamera.setOnClickListener { startCamera() }
@@ -75,8 +83,10 @@ class ScanActivity : AppCompatActivity() {
             }
             override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                 val intent = Intent(this@ScanActivity, PreviewActivity::class.java)
-                intent.putExtra("picture", photoFile)
-                intent.putExtra("isBackCamera", cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
+                intent.putExtra(PreviewActivity.EXTRA_LABEL, label)
+                intent.putExtra(PreviewActivity.EXTRA_DATE, date)
+                intent.putExtra(PreviewActivity.EXTRA_PICTURE, photoFile)
+                intent.putExtra(PreviewActivity.EXTRA_IS_BACK_CAMERA, cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
                 startActivity(intent)
                 finish()
             }
@@ -121,5 +131,10 @@ class ScanActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _activityScanBinding = null
+    }
+
+    companion object{
+        const val EXTRA_LABEL = "extra_label"
+        const val EXTRA_DATE = "extra_date"
     }
 }
