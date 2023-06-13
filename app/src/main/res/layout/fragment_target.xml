@@ -7,15 +7,29 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv_weight_current2"
+        android:id="@+id/tv_weight_current"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/semi_bold"
-        android:text="Weight"
+        android:text="Enter your weight in "
+        android:textColor="@color/black_2"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/tv_weight_current4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/bold"
+        android:text="Kg"
+        android:textColor="@color/orange_5"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_weight_current"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
@@ -27,7 +41,7 @@
         android:fontFamily="@font/semi_bold"
         android:gravity="top"
         android:text="What is your goal weight?"
-        android:textColor="@color/second_text1"
+        android:textColor="@color/black_4"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivBack" />
@@ -38,32 +52,34 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/medium"
         android:text="You can update any time"
-        android:textColor="@color/second_text2"
+        android:textColor="@color/black_3"
         app:layout_constraintStart_toStartOf="@+id/welcome2"
         app:layout_constraintTop_toBottomOf="@+id/welcome2" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_weight"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:layout_marginHorizontal="32dp"
-        app:endIconMode="none"
+        android:layout_marginTop="8dp"
+        app:endIconDrawable="@drawable/baseline_person_24"
         app:helperTextEnabled="true"
         app:helperTextTextColor="@color/red"
-        app:hintTextColor="@color/second_text2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weight_current2"
-        app:suffixText="Kg">
+        app:layout_constraintTop_toBottomOf="@+id/tv_weight_current">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text"
-            android:inputType="text"
-            android:textSize="14sp"
+            android:focusable="true"
+            android:inputType="number"
+            android:maxLength="3"
+            android:textAlignment="center"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 

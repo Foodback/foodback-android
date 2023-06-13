@@ -79,9 +79,9 @@ class GoalFragment : Fragment() {
 
 
     private fun setColorBackground(){
-        val primaryColor = ContextCompat.getColor(requireContext(), R.color.primary)
+        val primaryColor = ContextCompat.getColor(requireContext(), R.color.orange_3)
         val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
-        val textColor = ContextCompat.getColor(requireContext(), R.color.second_text2)
+        val textColor = ContextCompat.getColor(requireContext(), R.color.black_3)
 
 
         binding.weightLoss.setCardBackgroundColor(if (binding.weightLoss.isChecked) primaryColor else whiteColor)
@@ -119,6 +119,6 @@ class GoalFragment : Fragment() {
     }
 
     companion object{
-        var GOAL_KEY: String = "goal"
+        const val GOAL_KEY: String = "goal"
     }
 }

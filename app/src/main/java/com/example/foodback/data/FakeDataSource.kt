@@ -1,27 +1,30 @@
 package com.example.foodback.data
 
+import com.example.foodback.data.remote.response.Exercise
+import com.example.foodback.data.remote.response.Meal
+
 object FakeDataSource {
     val dummyDiary = mutableListOf(
         "Breakfast",
-        FakeData("makanan1", "desc1"),
-        FakeData("makanan1", "desc1"),
-        FakeAddButton(true,"Add Breakfast"),
-        "Lunch",
-        FakeData("makanan2", "desc2"),
-        FakeData("makanan2", "desc2"),
-        FakeAddButton(true,"Add Lunch"),
-        "Snack",
-        FakeData("makanan3", "desc3"),
-        FakeData("makanan3", "desc3"),
-        FakeAddButton(true,"Add Snack"),
-        "Dinner",
-        FakeData("makanan4", "desc4"),
-        FakeData("makanan4", "desc4"),
-        FakeAddButton(true, "Add Dinner"),
+//        Meal("makanan1", 1, 1, "date"),
+//        Meal("makanan1", "desc1"),
+//        AddButton(true,"Add Breakfast"),
+//        "Lunch",
+//        Meal("makanan2", "desc2"),
+//        Meal("makanan2", "desc2"),
+//        FakeAddButton(true,"Add Lunch"),
+//        "Snack",
+//        Meal("makanan3", "desc3"),
+//        Meal("makanan3", "desc3"),
+//        FakeAddButton(true,"Add Snack"),
+//        "Dinner",
+//        Meal("makanan4", "desc4"),
+//        Meal("makanan4", "desc4"),
+//        FakeAddButton(true, "Add Dinner"),
         "Exercises",
-        FakeData("aktivitas5", "desc5"),
-        FakeData("aktivitas5", "desc5"),
-        FakeAddButton(false, "Add Exercise"),
+//        Exercise(1, "exercise1", 1, 1, 1, 1, 1, "date",  "ca", "ua"),
+//        Meal("aktivitas5", "desc5"),
+//        AddButton(false, "Add Exercise"),
     )
 
     val dummyAdd = mutableListOf(

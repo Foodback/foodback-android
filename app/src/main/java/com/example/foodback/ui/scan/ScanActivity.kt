@@ -1,12 +1,14 @@
 package com.example.foodback.ui.scan
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -18,14 +20,32 @@ import com.example.foodback.databinding.ActivityScanBinding
 import com.example.foodback.ui.detail.DetailActivity
 import com.example.foodback.ui.preview.PreviewActivity
 import com.example.foodback.utils.createFile
+import com.example.foodback.utils.uriToFile
+import java.io.File
 
 class ScanActivity : AppCompatActivity() {
+
+    private var getFile: File? = null
 
     private var _activityScanBinding : ActivityScanBinding? = null
     private val binding get() = _activityScanBinding!!
 
     private var imageCapture: ImageCapture? = null
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+    private val launcherIntentGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg = result.data?.data as Uri
+            selectedImg.let { uri ->
+                val myFile = uriToFile(uri, this@ScanActivity)
+                val intent = Intent(this@ScanActivity, PreviewActivity::class.java)
+                intent.putExtra("picture", myFile)
+                intent.putExtra("gallery", uri.toString())
+                startActivity(intent)
+                finish()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +57,7 @@ class ScanActivity : AppCompatActivity() {
 
         binding.captureImage.setOnClickListener { takePhoto() }
         binding.switchCamera.setOnClickListener { startCamera() }
+        binding.btnGallery.setOnClickListener { startGallery() }
     }
 
     public override fun onResume() {
@@ -56,7 +77,6 @@ class ScanActivity : AppCompatActivity() {
                 val intent = Intent(this@ScanActivity, PreviewActivity::class.java)
                 intent.putExtra("picture", photoFile)
                 intent.putExtra("isBackCamera", cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
-//                setResult(AddStoryActivity.CAMERA_X_RESULT, intent)
                 startActivity(intent)
                 finish()
             }
@@ -86,9 +106,16 @@ class ScanActivity : AppCompatActivity() {
         binding.switchCamera.setOnClickListener {
             cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
             else CameraSelector.DEFAULT_BACK_CAMERA
-
             startCamera()
         }
+    }
+
+    private fun startGallery() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
     }
 
     override fun onDestroy() {

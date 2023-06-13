@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-parcelize'
 //    id 'kotlin-kapt'
 }
 
@@ -17,7 +18,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BASE_URL", '"https://story-api.dicoding.dev/v1/"')
+        buildConfigField("String", "BASE_URL", '"https://flawless-window-387611.et.r.appspot.com/api/"')
     }
 
     buildTypes {
@@ -36,6 +37,7 @@ android {
     buildFeatures {
         buildConfig true
         viewBinding true
+        mlModelBinding true
     }
 }
 
@@ -87,4 +89,11 @@ dependencies {
 
     //Gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+
+    //TensorFlow Lite
+    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
+
+    //Circular Progressbar
+    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
 }

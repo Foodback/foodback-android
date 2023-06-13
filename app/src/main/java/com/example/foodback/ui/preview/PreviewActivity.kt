@@ -1,26 +1,41 @@
 package com.example.foodback.ui.preview
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import com.example.foodback.R
 import com.example.foodback.databinding.ActivityPreviewBinding
+import com.example.foodback.ml.Mobilenet
 import com.example.foodback.ui.detail.DetailActivity
+import org.tensorflow.lite.support.image.ImageProcessor
 import com.example.foodback.ui.scan.ScanActivity
 import com.example.foodback.utils.rotateFile
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.image.ops.ResizeOp
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.File
 
 class PreviewActivity : AppCompatActivity() {
 
-//    private var getFile: File? = null
+    private var getFile: File? = null
 
     private var _activityPreviewBinding : ActivityPreviewBinding? = null
     private val binding get() = _activityPreviewBinding!!
 
+    private val imageProcessor = ImageProcessor.Builder()
+        .add(ResizeOp(224, 224, ResizeOp.ResizeMethod.BILINEAR))
+        .build()
+
+    private lateinit var labels: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +44,7 @@ class PreviewActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+        labels = application.assets.open("class.txt").bufferedReader().readLines()
 
         val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getSerializableExtra("picture", File::class.java)
@@ -36,23 +52,69 @@ class PreviewActivity : AppCompatActivity() {
             @Suppress("DEPRECATION")
             intent.getSerializableExtra("picture")
         } as? File
+        val isBackCamera = intent.getBooleanExtra("isBackCamera", true)
+        val gallery = intent.getStringExtra("gallery")
+        val galleryUri: Uri? = if(gallery != null) Uri.parse(gallery) else null
 
-        val isBackCamera = intent.getBooleanExtra("isBackCamera", true) as Boolean
         myFile?.let { file ->
             rotateFile(file, isBackCamera)
-//            getFile = file
-            binding.ivPreview.setImageBitmap(BitmapFactory.decodeFile(file.path))
+            getFile = file
+            if(galleryUri == null){
+                binding.ivPreview.setImageBitmap(BitmapFactory.decodeFile(file.path))
+            }else{
+                binding.ivPreview.setImageURI(galleryUri)
+            }
         }
 
         binding.btnAdd.setOnClickListener {
-            startActivity(Intent(this@PreviewActivity, DetailActivity::class.java))
-            finish()
+            if (getFile != null) {
+                val output = outputGenerator(BitmapFactory.decodeFile(getFile!!.path))
+                val intent = Intent(this@PreviewActivity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_OUTPUT, output)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this@PreviewActivity, "Image empty", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         binding.btnCancel.setOnClickListener {
             startActivity(Intent(this@PreviewActivity, ScanActivity::class.java))
             finish()
         }
+    }
+
+    private fun outputGenerator(bitmap: Bitmap): String{
+
+        var tensorImage = TensorImage(DataType.FLOAT32)
+        tensorImage.load(bitmap)
+
+        tensorImage = imageProcessor.process(tensorImage)
+
+        val model = Mobilenet.newInstance(this)
+
+        // Creates inputs for reference.
+        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
+        inputFeature0.loadBuffer(tensorImage.buffer)
+
+        // Runs model inference and gets result.
+        val outputs = model.process(inputFeature0)
+        val outputFeature0 = outputs.outputFeature0AsTensorBuffer.floatArray
+
+        var maxIdx = 0
+        outputFeature0.forEachIndexed { index, fl ->
+            if(outputFeature0[maxIdx] < fl){
+                maxIdx = index
+            }
+        }
+
+//        binding.btnPredict.text = maxIdx.toString()
+//        binding.tvResult.text =
+
+        // Releases model resources if no longer used.
+        model.close()
+        return labels[maxIdx]
     }
 
 

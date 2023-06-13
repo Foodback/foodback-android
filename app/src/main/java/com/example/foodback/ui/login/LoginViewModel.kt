@@ -10,7 +10,5 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
 
     fun login(email: String, password: String) = repository.login(email, password).asLiveData()
 
-    fun register(email: String, password: String) = repository.register(email, password).asLiveData()
-
     fun logout() = repository.logout().asLiveData()
 }

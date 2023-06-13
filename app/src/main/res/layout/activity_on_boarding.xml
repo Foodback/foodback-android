@@ -54,7 +54,7 @@
         android:fontFamily="@font/bold"
         android:gravity="top"
         android:text="Foodback"
-        android:textColor="@color/primary_text"
+        android:textColor="@color/orange_5"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcome" />
@@ -83,7 +83,7 @@
         android:fontFamily="@font/bold"
         android:text="Register"
         android:textAllCaps="false"
-        android:textColor="@color/primary"
+        android:textColor="@color/orange_4"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

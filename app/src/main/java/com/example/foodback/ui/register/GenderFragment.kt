@@ -69,9 +69,9 @@ class GenderFragment : Fragment() {
     }
 
     private fun setColorBackground(){
-        val primaryColor = ContextCompat.getColor(requireContext(), R.color.primary)
+        val primaryColor = ContextCompat.getColor(requireContext(), R.color.orange_3)
         val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
-        val textColor = ContextCompat.getColor(requireContext(), R.color.second_text2)
+        val textColor = ContextCompat.getColor(requireContext(), R.color.black_3)
         val maleAfter = ContextCompat.getDrawable(requireContext(), R.drawable.male_after)
         val male = ContextCompat.getDrawable(requireContext(), R.drawable.male)
         val femaleAfter = ContextCompat.getDrawable(requireContext(), R.drawable.female_after)

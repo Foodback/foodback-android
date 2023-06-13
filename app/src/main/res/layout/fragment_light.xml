@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.register.LightFragment">
 
-
     <TextView
         android:id="@+id/welcome2"
         android:layout_width="272dp"
@@ -15,7 +14,7 @@
         android:fontFamily="@font/semi_bold"
         android:text="Lightly active "
         android:textAlignment="center"
-        android:textColor="@color/second_text1"
+        android:textColor="@color/black_4"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +27,7 @@
         android:fontFamily="@font/medium"
         android:text="Refers to engaging in physical activities with low intensity. These activities usually require minimal physical effort and may not significantly increase heart rate or cause substantial sweating. "
         android:textAlignment="center"
-        android:textColor="@color/second_text2"
+        android:textColor="@color/black_3"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

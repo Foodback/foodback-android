@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
-    private val loginViewModel: LoginViewModel by viewModels {
+    private val mainViewModel: MainViewModel by viewModels {
         ViewModelFactory.getInstance(dataStore)
     }
 
@@ -40,24 +40,12 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-//        loginViewModel.isLogin().observe(this){
-//            if(it == null){
-//                startActivity(Intent(this@MainActivity, OnBoardingActivity::class.java))
-//                finish()
-//            }
-//        }
-
-        if (fragment !is HomeFragment){
-            mFragmentManager.commit {
-                add(R.id.frame_navBottom, mHomeFragment, HomeFragment::class.java.simpleName)
-            }
-        }
+        setMode(R.id.home)
 
         binding.navBottom.setOnItemSelectedListener {
             setMode(it.itemId)
             true
         }
-
     }
 
     private fun setMode(selectedMode: Int) {
@@ -75,13 +63,13 @@ class MainActivity : AppCompatActivity() {
                 title ="Profile"
             }
         }
-        setActionBarTitle(title)
+//        setActionBarTitle(title)
     }
 
     private fun navigateToFragment(mFragment: Fragment){
         mFragmentManager.commit {
 //            addToBackStack(null)
-            replace(R.id.frame_navBottom, mFragment, mFragment::class.java.simpleName)
+            replace(R.id.frame_home, mFragment, mFragment::class.java.simpleName)
         }
     }
 
