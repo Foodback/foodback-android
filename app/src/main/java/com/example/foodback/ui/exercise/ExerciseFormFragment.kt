@@ -19,7 +19,6 @@ import com.example.foodback.databinding.FragmentExerciseFormBinding
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.food.FoodActivity
 import com.example.foodback.ui.main.DiaryFragment
-import com.example.foodback.ui.main.MainViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

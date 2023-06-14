@@ -21,7 +21,7 @@ import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.login.LoginActivity
 import com.example.foodback.ui.onboarding.OnBoardingActivity
 
-class   StartFragment : Fragment() {
+class StartFragment : Fragment() {
 
     private var _binding: FragmentStartBinding? = null
     private val binding get() = _binding!!

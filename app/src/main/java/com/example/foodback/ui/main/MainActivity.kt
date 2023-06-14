@@ -3,16 +3,21 @@ package com.example.foodback.ui.main
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import com.example.foodback.R
 import com.example.foodback.databinding.ActivityMainBinding
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.login.LoginViewModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,8 +26,10 @@ class MainActivity : AppCompatActivity() {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
+    private var date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
     private val mainViewModel: MainViewModel by viewModels {
-        ViewModelFactory.getInstance(dataStore)
+        ViewModelFactory.getInstance(dataStore, date)
     }
 
     private val mFragmentManager = supportFragmentManager

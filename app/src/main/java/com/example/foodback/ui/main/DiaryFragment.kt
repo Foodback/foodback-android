@@ -34,11 +34,12 @@ class DiaryFragment : Fragment() {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
+    private var date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
     private val mainViewModel: MainViewModel by activityViewModels {
-        ViewModelFactory.getInstance(requireActivity().dataStore)
+        ViewModelFactory.getInstance(requireActivity().dataStore, date)
     }
 
-    private var date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -49,11 +50,10 @@ class DiaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainViewModel.getDiary(date)
-
         val launcherAddDiaryActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == ProfileFragment.RESULT_OK) {
                 mainViewModel.getDiary(date)
+                mainViewModel.getHome()
             }
         }
 
@@ -96,7 +96,6 @@ class DiaryFragment : Fragment() {
                     }
                 }
                 is Result.Error ->{
-                    Log.i("TEST", "diaryData Error")
                     binding.pbDiary.visibility = View.GONE
                     Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
                 }

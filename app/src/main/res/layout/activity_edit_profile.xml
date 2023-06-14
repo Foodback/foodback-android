@@ -33,13 +33,13 @@
         android:id="@+id/tv_username_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:fontFamily="@font/semi_bold"
         android:text="Username"
         android:textColor="@color/black_2"
         android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_email"
         app:layout_constraintStart_toStartOf="@+id/ed_username_edit"
-        app:layout_constraintTop_toBottomOf="@+id/tv_edit_profile" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/ed_username_edit"
@@ -61,13 +61,13 @@
         android:id="@+id/tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/semi_bold"
         android:text="Email"
         android:textColor="@color/black_2"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/ed_username_edit"
-        app:layout_constraintTop_toBottomOf="@+id/ed_username_edit" />
+        app:layout_constraintBottom_toTopOf="@+id/tv_gender_edit"
+        app:layout_constraintStart_toStartOf="@+id/ed_email_edit"
+        app:layout_constraintTop_toBottomOf="@+id/tv_username_edit" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/ed_email_edit"
@@ -76,14 +76,14 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/edit_text"
-        android:inputType="text"
-        android:padding="8dp"
-        android:textColor="@color/black_2"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        android:textStyle="bold"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/black_2"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_email" />
@@ -92,13 +92,13 @@
         android:id="@+id/tv_gender_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/semi_bold"
-        android:text="Activity"
+        android:text="Gender"
         android:textColor="@color/black_2"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/ed_email_edit"
-        app:layout_constraintTop_toBottomOf="@+id/ed_email_edit" />
+        app:layout_constraintBottom_toTopOf="@+id/tv_activity_edit"
+        app:layout_constraintStart_toStartOf="@+id/layout_gender"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_gender"
@@ -123,13 +123,13 @@
         android:id="@+id/tv_activity_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/semi_bold"
         android:text="Activity"
         android:textColor="@color/black_2"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/layout_gender"
-        app:layout_constraintTop_toBottomOf="@+id/layout_gender" />
+        app:layout_constraintBottom_toTopOf="@+id/tv_goal_edit"
+        app:layout_constraintStart_toStartOf="@+id/layout_activity"
+        app:layout_constraintTop_toBottomOf="@+id/tv_gender_edit" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_activity"
@@ -153,13 +153,13 @@
         android:id="@+id/tv_goal_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/semi_bold"
         android:text="Goal"
         android:textColor="@color/black_2"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/layout_activity"
-        app:layout_constraintTop_toBottomOf="@+id/layout_activity" />
+        app:layout_constraintBottom_toTopOf="@+id/tv_weight_edit"
+        app:layout_constraintStart_toStartOf="@+id/layout_goal"
+        app:layout_constraintTop_toBottomOf="@+id/tv_activity_edit" />
 
     <TextView
         android:id="@+id/ed_target_edit_edit"
@@ -210,13 +210,13 @@
         android:id="@+id/tv_weight_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/semi_bold"
         android:text="Weight"
         android:textColor="@color/black_2"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/layout_goal"
-        app:layout_constraintTop_toBottomOf="@+id/layout_goal" />
+        app:layout_constraintBottom_toTopOf="@+id/btn_save_edit"
+        app:layout_constraintStart_toStartOf="@+id/ed_weight_edit"
+        app:layout_constraintTop_toBottomOf="@+id/tv_goal_edit" />
 
     <TextView
         android:id="@+id/tv_height_edit"
@@ -266,19 +266,20 @@
 
     <Button
         android:id="@+id/btn_save_edit"
-        android:layout_width="330dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="16dp"
         android:background="@drawable/button"
         android:fontFamily="@font/bold"
-        android:layout_marginTop="34dp"
         android:text="Save"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/layout_activity"
-        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="@+id/layout_activity"
-        app:layout_constraintTop_toBottomOf="@+id/ed_weight_edit" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_weight_edit" />
 
     <ProgressBar
         android:id="@+id/pb_edit_profile"

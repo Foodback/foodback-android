@@ -19,6 +19,9 @@ import com.example.foodback.databinding.FragmentDiaryBinding
 import com.example.foodback.databinding.FragmentHomeBinding
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.login.LoginActivity
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -27,8 +30,10 @@ class HomeFragment : Fragment() {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
+    private var date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
     private val mainViewModel: MainViewModel by activityViewModels {
-        ViewModelFactory.getInstance(requireActivity().dataStore)
+        ViewModelFactory.getInstance(requireActivity().dataStore, date)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -64,8 +69,6 @@ class HomeFragment : Fragment() {
                 }
                 is Result.Success ->{
                     binding.pbHome.visibility = View.GONE
-                    Toast.makeText(requireActivity(), result.data.message, Toast.LENGTH_SHORT).show()
-
                     binding.circularProgressBar.apply {
                         progress = result.data.homeData.target.toFloat()
                         progressMax = 2650f

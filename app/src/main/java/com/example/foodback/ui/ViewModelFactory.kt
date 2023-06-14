@@ -1,5 +1,6 @@
 package com.example.foodback.ui
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
@@ -13,15 +14,16 @@ import com.example.foodback.ui.food.FoodViewModel
 import com.example.foodback.ui.login.LoginViewModel
 import com.example.foodback.ui.main.MainViewModel
 import com.example.foodback.ui.register.RegisterViewModel
+import kotlin.math.log
 
-class ViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val repository: Repository, private val date: String) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(repository) as T
-        }
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return LoginViewModel(repository) as T
+            return LoginViewModel(repository, date) as T
+        }
+        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            return MainViewModel(repository, date) as T
         }
         if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
             return RegisterViewModel(repository) as T
@@ -44,8 +46,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
     companion object {
         @Volatile
         private var instance: ViewModelFactory? = null
-        fun getInstance(dataStore: DataStore<Preferences>): ViewModelFactory = instance ?: synchronized(this) {
-            instance ?: ViewModelFactory(Injection.provideRepository(dataStore))
+        fun getInstance(dataStore: DataStore<Preferences>, date: String = ""): ViewModelFactory = instance ?: synchronized(this) {
+            Log.i("TEST", "getInstance: $date")
+            instance ?: ViewModelFactory(Injection.provideRepository(dataStore), date)
         }.also { instance = it }
     }
 }

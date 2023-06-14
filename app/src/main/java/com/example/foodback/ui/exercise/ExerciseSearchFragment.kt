@@ -30,7 +30,6 @@ import com.example.foodback.data.Result
 import com.example.foodback.databinding.FragmentExerciseSearchBinding
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.main.DiaryFragment
-import com.example.foodback.ui.main.MainViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -76,22 +75,26 @@ class ExerciseSearchFragment : Fragment() {
                     binding.pbSearchExercise.visibility = View.GONE
                     val exerciseAdapter = ExerciseAdapter(resultData.data.exerciseData){ exercise ->
                         btnYes.setOnClickListener {
-                            exerciseViewModel.addExercise(exercise.name, exercise.total_calories/exercise.duration_minutes*edDuration.text.toString().toLong(), edDuration.text.toString().toLong(), 0, 0, exerciseViewModel.date).observe(viewLifecycleOwner){ result ->
-                                when(result){
-                                    is Result.Loading ->{
-                                        binding.pbSearchExercise.visibility = View.VISIBLE
-                                    }
-                                    is Result.Success ->{
-                                        binding.pbSearchExercise.visibility = View.GONE
-                                        Toast.makeText(requireActivity(), result.data.message, Toast.LENGTH_SHORT).show()
-                                        requireActivity().setResult(DiaryFragment.RESULT_OK, Intent())
-                                        requireActivity().finish()
-                                    }
-                                    is Result.Error -> {
-                                        binding.pbSearchExercise.visibility = View.GONE
-                                        Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
+                            if(edDuration.text.toString().isNotBlank()){
+                                exerciseViewModel.addExercise(exercise.name, exercise.total_calories/exercise.duration_minutes*edDuration.text.toString().toLong(), edDuration.text.toString().toLong(), 0, 0, exerciseViewModel.date).observe(viewLifecycleOwner){ result ->
+                                    when(result){
+                                        is Result.Loading ->{
+                                            binding.pbSearchExercise.visibility = View.VISIBLE
+                                        }
+                                        is Result.Success ->{
+                                            binding.pbSearchExercise.visibility = View.GONE
+                                            Toast.makeText(requireActivity(), result.data.message, Toast.LENGTH_SHORT).show()
+                                            requireActivity().setResult(DiaryFragment.RESULT_OK, Intent())
+                                            requireActivity().finish()
+                                        }
+                                        is Result.Error -> {
+                                            binding.pbSearchExercise.visibility = View.GONE
+                                            Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
+                                        }
                                     }
                                 }
+                            }else{
+                                Toast.makeText(requireActivity(), "Can't be blank", Toast.LENGTH_SHORT).show()
                             }
                         }
                         btnNo.setOnClickListener {

@@ -7,17 +7,16 @@
 
     <TextView
         android:id="@+id/tv_date"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="4dp"
         android:fontFamily="@font/semi_bold"
         android:text="DATE"
+        android:layout_marginVertical="16dp"
+        android:layout_marginEnd="8dp"
         android:textColor="@color/black_3"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/btn_date_picker"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,11 +24,12 @@
         android:id="@+id/btn_date_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="130dp"
         android:background="#00FFFFFF"
         android:src="@drawable/calendar_lines_24"
+        android:layout_marginVertical="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_date"
+        app:layout_constraintStart_toEndOf="@+id/tv_date"
+        app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/black_3" />
 
     <androidx.recyclerview.widget.RecyclerView

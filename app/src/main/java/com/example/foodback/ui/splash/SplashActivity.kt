@@ -16,13 +16,18 @@ import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.login.LoginViewModel
 import com.example.foodback.ui.main.MainActivity
 import com.example.foodback.ui.onboarding.OnBoardingActivity
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class SplashActivity : AppCompatActivity() {
 
     private val handler = Handler(Looper.getMainLooper())
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
+    private val dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
+    private var date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
     private val loginViewModel: LoginViewModel by viewModels {
-        ViewModelFactory.getInstance(dataStore)
+        ViewModelFactory.getInstance(dataStore, date)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

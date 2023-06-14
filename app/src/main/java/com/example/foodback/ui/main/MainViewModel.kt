@@ -1,5 +1,6 @@
 package com.example.foodback.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,7 @@ import com.example.foodback.data.remote.response.ProfileResponse
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: Repository) : ViewModel() {
+class MainViewModel(private val repository: Repository, val date: String) : ViewModel() {
 
     private val _homeData = MutableLiveData<Result<HomeResponse>>()
     val homeData : LiveData<Result<HomeResponse>>
@@ -30,7 +31,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
 
     init {
         getHome()
+        getDiary(date)
         getProfile()
+        Log.i("TEST", "$date")
     }
 
     fun getHome(){

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -21,6 +22,9 @@ import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.edit.EditProfileActivity
 import com.example.foodback.ui.login.LoginViewModel
 import com.example.foodback.ui.onboarding.OnBoardingActivity
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ProfileFragment : Fragment() {
 
@@ -29,11 +33,12 @@ class ProfileFragment : Fragment() {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
-    private val loginViewModel: LoginViewModel by activityViewModels {
-        ViewModelFactory.getInstance(requireActivity().dataStore)
-    }
+    private var date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
     private val mainViewModel: MainViewModel by activityViewModels {
+        ViewModelFactory.getInstance(requireActivity().dataStore, date)
+    }
+    private val loginViewModel: LoginViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireActivity().dataStore)
     }
 
@@ -54,6 +59,8 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        val builder = AlertDialog.Builder(requireActivity())
+
         mainViewModel.profileData.observe(viewLifecycleOwner){ result ->
             when(result){
                 is Result.Loading -> {
@@ -62,7 +69,6 @@ class ProfileFragment : Fragment() {
                 is Result.Success -> {
                     binding.pbProfile.visibility = View.GONE
                     profileData = result.data.profileData
-                    Toast.makeText(requireActivity(), result.data.message, Toast.LENGTH_SHORT).show()
                     binding.tvNameProfile.text = result.data.profileData.username
                     binding.tvEmailProfile.text = result.data.profileData.email
                     binding.tvGenderProfile.text = result.data.profileData.gender
@@ -80,23 +86,30 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnLogout.setOnClickListener {
-            loginViewModel.logout().observe(viewLifecycleOwner) { result ->
-                when(result){
-                    is Result.Loading -> {
-                        binding.pbProfile.visibility = View.VISIBLE
+            builder
+                .setTitle("Logout")
+                .setMessage("Do you want to logout?")
+                .setCancelable(true)
+                .setPositiveButton("Yes"){_, _ ->
+                    loginViewModel.logout().observe(viewLifecycleOwner) { result ->
+                        when(result){
+                            is Result.Loading -> {
+                                binding.pbProfile.visibility = View.VISIBLE
+                            }
+                            is Result.Success -> {
+                                binding.pbProfile.visibility = View.GONE
+                                Toast.makeText(requireActivity(), result.data, Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(requireActivity(), OnBoardingActivity::class.java))
+                                requireActivity().finish()
+                            }
+                            is Result.Error -> {
+                                binding.pbProfile.visibility = View.GONE
+                                Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
-                    is Result.Success -> {
-                        binding.pbProfile.visibility = View.GONE
-                        Toast.makeText(requireActivity(), result.data, Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(requireActivity(), OnBoardingActivity::class.java))
-                        requireActivity().finish()
-                    }
-                    is Result.Error -> {
-                        binding.pbProfile.visibility = View.GONE
-                        Toast.makeText(requireActivity(), result.error, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+                }.setNegativeButton("No"){dialogInterface, _, -> dialogInterface.cancel()}
+                .show()
         }
 
         binding.btnEditProfile.setOnClickListener {
