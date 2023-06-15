@@ -2,30 +2,23 @@ package com.example.foodback.ui.scan
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowInsets
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.example.foodback.R
 import com.example.foodback.databinding.ActivityScanBinding
-import com.example.foodback.ui.detail.DetailActivity
 import com.example.foodback.ui.preview.PreviewActivity
 import com.example.foodback.utils.createFile
 import com.example.foodback.utils.uriToFile
 import java.io.File
 
 class ScanActivity : AppCompatActivity() {
-
-    private var getFile: File? = null
 
     private var _activityScanBinding : ActivityScanBinding? = null
     private val binding get() = _activityScanBinding!!

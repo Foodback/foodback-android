@@ -16,7 +16,7 @@ class FoodAdapter(private val listFood: List<MenuItems>, private val onClick: (M
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvAddFoodName.text = listFood[holder.adapterPosition].title
-        holder.binding.tvAddFoodDesc.text = listFood[holder.adapterPosition].nutrition.calories.toString()
+        holder.binding.tvAddFoodDesc.text = "${listFood[holder.adapterPosition].nutrition.calories.toLong()} cal"
 
         holder.itemView.setOnClickListener {
             onClick(listFood[holder.adapterPosition])

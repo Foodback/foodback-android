@@ -1,24 +1,19 @@
 package com.example.foodback.ui.main
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.foodback.R
 import com.example.foodback.data.Result
-import com.example.foodback.databinding.FragmentDiaryBinding
 import com.example.foodback.databinding.FragmentHomeBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.login.LoginActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -70,23 +65,23 @@ class HomeFragment : Fragment() {
                 is Result.Success ->{
                     binding.pbHome.visibility = View.GONE
                     binding.circularProgressBar.apply {
-                        progress = result.data.homeData.target.toFloat()
-                        progressMax = 2650f
+                        setProgressWithAnimation((result.data.foodCalories - result.data.exerciseCalories).toFloat(), 1000)
+                        progressMax = result.data.calorieNeeds.toFloat()
                     }
                     binding.eatProgress.apply {
-                        progress = result.data.homeData.foodCalories.toFloat()
-                        progressMax = 2650f
+                        setProgressWithAnimation(result.data.foodCalories.toFloat(), 1000)
+                        progressMax = (result.data.calorieNeeds + result.data.exerciseCalories).toFloat()
                     }
                     binding.burnProgress.apply {
-                        progress = result.data.homeData.exerciseCalories.toFloat()
-                        progressMax = 2650f
+                        setProgressWithAnimation((result.data.exerciseCalories.toFloat()), 1000)
+                        progressMax = (result.data.foodCalories + result.data.target).toFloat()
                     }
-                    binding.tvGoalHome.text = result.data.homeData.goal
-                    binding.tvTargetHome.text = "${result.data.homeData.target} KG"
-                    binding.tvFoodHome.text = "${result.data.homeData.foodCalories} cal"
-                    binding.tvExerciseHome.text =  "${result.data.homeData.exerciseCalories} cal"
-                    binding.tvTotalHome.text = "2650"
-                    binding.tvCaloriesTargetHome.text = "2650"
+                    binding.tvGoalHome.text = result.data.goal
+                    binding.tvTargetHome.text = "${result.data.target} Kg"
+                    binding.tvFoodHome.text = "${result.data.foodCalories} Cal"
+                    binding.tvExerciseHome.text =  "${result.data.exerciseCalories} Cal"
+                    binding.tvTotalHome.text = "${result.data.foodCalories - result.data.exerciseCalories} Cal"
+                    binding.tvCaloriesNeedsHome.text = "${result.data.calorieNeeds} Cal"
                 }
                 is Result.Error ->{
                     binding.pbHome.visibility = View.GONE
@@ -94,8 +89,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-
-
     }
 
     override fun onDestroy() {

@@ -1,9 +1,7 @@
 package com.example.foodback.ui.register
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +9,12 @@ import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
 import com.example.foodback.databinding.FragmentGenderBinding
-import com.example.foodback.databinding.FragmentStartBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.onboarding.OnBoardingActivity
 
 class GenderFragment : Fragment() {
 

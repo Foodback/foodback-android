@@ -68,29 +68,3 @@ fun uriToFile(selectedImg: Uri, context: Context): File {
 
     return myFile
 }
-
-fun reduceFileImage(file: File): File {
-    val bitmap = BitmapFactory.decodeFile(file.path)
-    var compressQuality = 100
-    var streamLength: Int
-    do {
-        val bmpStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
-        val bmpPicByteArray = bmpStream.toByteArray()
-        streamLength = bmpPicByteArray.size
-        compressQuality -= 5
-    } while (streamLength > MAXIMAL_SIZE)
-    bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
-    return file
-}
-
-fun getBitMap(url: String): Bitmap?{
-    return try {
-        val urlx = URL(url)
-        val image = BitmapFactory.decodeStream(urlx.openConnection().getInputStream())
-        image
-    } catch (e: IOException) {
-        Log.e("MediaUtility", "getBitMap: Error getting image bitmap")
-        null
-    }
-}

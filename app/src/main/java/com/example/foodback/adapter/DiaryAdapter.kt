@@ -11,7 +11,7 @@ import com.example.foodback.databinding.ItemButtonBinding
 import com.example.foodback.databinding.ItemListBinding
 import com.example.foodback.databinding.ItemTypeBinding
 
-class DiaryAdapter(private val data: List<Any>, private val onClickData: (Any) -> Unit, private val  onDeleteData: (Any) -> Unit, private val onAddFood: (String) -> Unit, private val onAddExercises: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DiaryAdapter(private val data: List<Any>, private val onAddFood: (String) -> Unit, private val onAddExercises: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class TypeViewHolder(var binding: ItemTypeBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(type: DiaryType){
@@ -26,8 +26,6 @@ class DiaryAdapter(private val data: List<Any>, private val onClickData: (Any) -
             binding.tvNameList.text = data.name
             binding.tvDescList.text = "${data.amount} Gram"
             binding.tvCalorieList.text = "${data.calories} Cal"
-//            binding.btnRemove.setOnClickListener { onDeleteData(data) }
-            this.itemView.setOnClickListener { onClickData(data) }
         }
     }
 
@@ -36,8 +34,6 @@ class DiaryAdapter(private val data: List<Any>, private val onClickData: (Any) -
             binding.tvNameList.text = data.name
             binding.tvDescList.text = "${data.duration} Minute"
             binding.tvCalorieList.text = "${data.calories} Cal"
-//            binding.btnRemove.setOnClickListener { onDeleteData(data) }
-            this.itemView.setOnClickListener { onClickData(data) }
         }
     }
 

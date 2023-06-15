@@ -1,10 +1,12 @@
 package com.example.foodback.ui.register
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -12,12 +14,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
-import com.example.foodback.databinding.FragmentLevelBinding
+import com.example.foodback.databinding.FragmentAgeBinding
 import com.example.foodback.ui.ViewModelFactory
+import java.util.Calendar
 
-class LevelFragment : Fragment() {
+class AgeFragment : Fragment() {
 
-    private var _binding: FragmentLevelBinding? = null
+    private var _binding: FragmentAgeBinding? = null
     private val binding get() = _binding!!
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
@@ -26,43 +29,46 @@ class LevelFragment : Fragment() {
         ViewModelFactory.getInstance(requireActivity().dataStore)
     }
 
+    private var age: String = ""
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentLevelBinding.inflate(inflater, container, false)
+        _binding = FragmentAgeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val goal: String? = registerViewModel.data[CurrentFragment.GOAL_KEY]
-
+        binding.btnNextAge.isEnabled = false
         binding.ivBack.setOnClickListener {
-            if (goal == "maintain") {
-                navigateFragment(4)
-            } else {
-                navigateFragment(5)
-            }
+            navigateFragment(2)
         }
 
-        binding.btnNextLevel.setOnClickListener {
-            navigateFragment(7)
+        binding.btnNextAge.setOnClickListener {
+            registerViewModel.addData(AGE_KEY,age)
+            navigateFragment(4)
         }
 
-        val fragmentList = arrayListOf(
-            LightFragment(),
-            ModerateFragment(),
-            ActiveFragment(),
-            VeryActiveFragment()
-        )
+        binding.dateBirth.setOnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
+            val selectedDate = Calendar.getInstance()
+            selectedDate.set(year, monthOfYear, dayOfMonth)
 
-        val adapter = ViewPagerAdapter(
-            fragmentList,
-            childFragmentManager,
-            lifecycle
-        )
+            calculateAge(selectedDate.timeInMillis)
+        }
+    }
 
-        binding.viewPager.adapter = adapter
-        binding.dotsIndicator.attachTo(binding.viewPager)
+    private fun calculateAge(dateInMillis: Long): String {
+        val dob = Calendar.getInstance()
+        dob.timeInMillis = dateInMillis
+
+        val today = Calendar.getInstance()
+
+        val date = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR)
+        age = date.toString()
+
+        binding.btnNextAge.isEnabled = date >= 1
+
+        return age
     }
 
     private fun navigateFragment(fragmentIndex: Int) {
@@ -70,8 +76,18 @@ class LevelFragment : Fragment() {
         viewPager?.currentItem = fragmentIndex
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(AGE_KEY, age)
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+        const val AGE_KEY: String = "age"
     }
 }

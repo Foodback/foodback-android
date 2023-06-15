@@ -1,17 +1,17 @@
 package com.example.foodback.ui.splash
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.foodback.R
+import com.example.foodback.data.Result
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.login.LoginViewModel
 import com.example.foodback.ui.main.MainActivity
@@ -40,13 +40,19 @@ class SplashActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         handler.postDelayed({
-            loginViewModel.isLogin().observe(this){
-                if(it != null){
-                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-                }else{
-                    startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
+            loginViewModel.isLogin().observe(this){ result ->
+                when(result){
+                    is Result.Loading -> {}
+                    is Result.Success -> {
+                        if(result.data != null){
+                            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                        }else{
+                            startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
+                        }
+                        finish()
+                    }
+                    is Result.Error -> { Toast.makeText(this@SplashActivity, result.error, Toast.LENGTH_SHORT).show() }
                 }
-                finish()
             }
         }, DELAY_TIME)
     }

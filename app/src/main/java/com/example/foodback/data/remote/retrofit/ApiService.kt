@@ -1,5 +1,6 @@
 package com.example.foodback.data.remote.retrofit
 
+import com.example.foodback.data.remote.response.AddExerciseResponse
 import com.example.foodback.data.remote.response.AddMealResponse
 import com.example.foodback.data.remote.response.AddProfileResponse
 import com.example.foodback.data.remote.response.DiaryResponse
@@ -66,7 +67,7 @@ interface ApiService {
         @Field("sets") sets: Long,
         @Field("repetition") repetition: Long,
         @Field("date") date: String,
-    ): AddMealResponse
+    ): AddExerciseResponse
 
     @FormUrlEncoded
     @POST("profile")
@@ -79,6 +80,7 @@ interface ApiService {
         @Field("activity") activity: String,
         @Field("goal") goal: String,
         @Field("target") target: Long,
+        @Field("age") age:Long
     ): AddProfileResponse
 
     @GET("profile")
@@ -99,6 +101,7 @@ interface ApiService {
         @Field("activity") activity: String,
         @Field("goal") goal: String,
         @Field("target") target: Long,
+        @Field("age") age: Long,
     ): EditProfileResponse
 
 }

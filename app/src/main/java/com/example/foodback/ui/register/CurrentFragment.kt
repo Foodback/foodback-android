@@ -1,12 +1,7 @@
 package com.example.foodback.ui.register
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.transition.Slide
-import android.util.Log
-import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +9,14 @@ import androidx.core.widget.doOnTextChanged
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.commit
 import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
 import com.example.foodback.databinding.FragmentCurrentBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.login.LoginActivity
 
-class CurrentFragment() : Fragment() {
+class CurrentFragment : Fragment() {
 
     private var _binding: FragmentCurrentBinding? = null
     private val binding get() = _binding!!
@@ -48,12 +42,12 @@ class CurrentFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setButton()
-        binding.edWeight.doOnTextChanged { text, start, before, count ->
+        binding.edWeight.doOnTextChanged { _, _, _, count ->
             weightDisable = if (count < 1) 0 else 1
             setValue()
             setButton()
         }
-        binding.edHeight.doOnTextChanged { text, start, before, count ->
+        binding.edHeight.doOnTextChanged { _, _, _, count ->
             heightDisable = if (count < 1) 0 else 1
             setValue()
             setButton()
@@ -63,12 +57,12 @@ class CurrentFragment() : Fragment() {
             registerViewModel.addData(HEIGHT_KEY, height)
             registerViewModel.addData(WEIGHT_KEY, weight)
             val goal: String? = registerViewModel.data[GOAL_KEY]
-            if (goal == "maintain") navigateFragment(5)
-             else navigateFragment(4)
+            if (goal == "maintain") navigateFragment(6)
+             else navigateFragment(5)
         }
 
         binding.ivBack.setOnClickListener {
-            navigateFragment(2)
+            navigateFragment(3)
         }
     }
 

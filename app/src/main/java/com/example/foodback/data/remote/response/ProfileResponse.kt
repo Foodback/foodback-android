@@ -50,6 +50,9 @@ data class ProfileData(
 
     @field:SerializedName("target")
     val target: Long,
+
+    @field:SerializedName("age")
+    val age: Long,
 ): Parcelable
 
 

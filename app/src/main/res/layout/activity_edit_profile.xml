@@ -6,6 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".ui.edit.EditProfileActivity">
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/ed_age_edit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="24dp"
+        android:background="@drawable/edit_text"
+        android:focusable="true"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/layout_gender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/layout_gender"
+        app:layout_constraintTop_toTopOf="@+id/layout_gender" />
+
+    <TextView
+        android:id="@+id/ed_target_edit_edit4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:text="Age"
+        android:textColor="@color/black_2"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/ed_age_edit"
+        app:layout_constraintStart_toStartOf="@+id/ed_age_edit" />
+
     <ImageView
         android:id="@+id/ivBack"
         android:layout_width="22dp"
@@ -103,19 +131,25 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_gender"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
+        android:layout_width="158dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:hint="Gender"
-        app:layout_constraintEnd_toEndOf="@+id/ed_weight_edit"
-        app:layout_constraintStart_toStartOf="@+id/ed_weight_edit"
+        android:background="@drawable/edit_text"
+        app:boxBackgroundMode="filled"
+        app:boxStrokeWidth="0dp"
+        app:layout_constraintEnd_toStartOf="@+id/ed_age_edit"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_gender_edit">
 
         <AutoCompleteTextView
             android:id="@+id/auto_complete_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:backgroundTint="#00FFFFFF"
+            android:inputType="none"
+            android:paddingTop="10dp"
+            android:textAlignment="center"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -137,7 +171,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:hint="Activity"
+        android:background="@drawable/edit_text"
+        app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="@+id/ed_weight_edit"
         app:layout_constraintStart_toStartOf="@+id/ed_weight_edit"
         app:layout_constraintTop_toBottomOf="@+id/tv_activity_edit">
@@ -146,7 +181,11 @@
             android:id="@+id/auto_complete_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:backgroundTint="#00FFFFFF"
+            android:inputType="none"
+            android:paddingTop="10dp"
+            android:textAlignment="center"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -178,7 +217,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:hint="Goal"
+        android:background="@drawable/edit_text"
+        app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toStartOf="@+id/ed_target_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_goal_edit">
@@ -187,7 +227,11 @@
             android:id="@+id/auto_complete_goal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:backgroundTint="#00FFFFFF"
+            android:inputType="none"
+            android:paddingTop="10dp"
+            android:textAlignment="center"
+            android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputEditText
@@ -236,7 +280,7 @@
         android:layout_marginHorizontal="24dp"
         android:background="@drawable/edit_text"
         android:focusable="true"
-        android:inputType="textEmailAddress"
+        android:inputType="number"
         android:maxLength="3"
         android:textAlignment="center"
         android:textSize="16sp"
@@ -254,7 +298,7 @@
         android:layout_marginHorizontal="24dp"
         android:background="@drawable/edit_text"
         android:focusable="true"
-        android:inputType="textEmailAddress"
+        android:inputType="number"
         android:maxLength="3"
         android:textAlignment="center"
         android:textSize="16sp"
@@ -268,8 +312,8 @@
         android:id="@+id/btn_save_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/button"
         android:fontFamily="@font/bold"
         android:text="Save"

@@ -5,6 +5,7 @@ import com.example.foodback.R
 import com.example.foodback.data.local.AuthPreferences
 import com.example.foodback.data.remote.response.DataExercise
 import com.example.foodback.data.remote.response.DataMeal
+import com.example.foodback.data.remote.response.ProfileData
 import com.example.foodback.data.remote.retrofit.ApiService
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -16,12 +17,17 @@ class Repository private constructor(private val apiService: ApiService, private
     private val auth = Firebase.auth
 
     fun isLogin() = flow {
-        if(auth.currentUser != null){
-            val token: String = auth.currentUser!!.getIdToken(true).await().token!!
-            authPreferences.saveToken(token)
+        emit(Result.Loading)
+        try{
+            if(auth.currentUser != null){
+                val token: String = auth.currentUser!!.getIdToken(true).await().token!!
+                authPreferences.saveToken(token)
+            }
+            emit(Result.Success(auth.currentUser))
+        }catch (e: Exception){
+            Log.d("Repository", "isLogin: ${e.message.toString()} ")
+            emit(Result.Error(e.message.toString()))
         }
-        emit(auth.currentUser)
-//        emitAll(authPreferences.getToken())
     }
 
     fun login(email: String, password: String) = flow{
@@ -40,16 +46,20 @@ class Repository private constructor(private val apiService: ApiService, private
     fun register(email: String, password: String, data: Map<String, String>) = flow{
         emit(Result.Loading)
         try {
+            val height = data[HEIGHT_KEY]?.toLong()
+            val weight = data[WEIGHT_KEY]?.toLong()
             val target = data[TARGET_KEY]?.toLong()
+            val age = data[AGE_KEY]?.toLong()
             val result = apiService.addProfile(
                 name = data[NAME_KEY]!!,
                 email = email,
                 gender = data[GENDER_KEY]!!,
-                height = 160,
-                weight = 55,
+                height = height?:0,
+                weight = weight?:0,
                 activity = data[LEVEL_KEY]!!,
                 goal = data[GOAL_KEY]!!,
                 target = target?:0,
+                age = age?:0,
             )
             auth.createUserWithEmailAndPassword(email, password).await()
             emit(Result.Success(result))
@@ -59,19 +69,42 @@ class Repository private constructor(private val apiService: ApiService, private
         }
     }
 
-    fun getHome() = flow {
+    fun getHome(date: String) = flow {
         emit(Result.Loading)
         try{
             authPreferences.getToken().collect{
                 if (it != null) {
-                    val result = apiService.getHome(it)
-                    emit(Result.Success(result))
+                    val homeResult = apiService.getHome(it)
+                    val diaryResult = apiService.getDiary(it, date, date)
+                    val profileResult = apiService.getProfile(it)
+                    val calorieNeeds = calculateCalorieNeeds(profileResult.profileData)
+                    Log.i("TEST", "getHome: $homeResult")
+                    val data = HomeModel(
+                        target = profileResult.profileData.target,
+                        goal = profileResult.profileData.goal,
+                        foodCalories = diaryResult.diaryData.listDataMeal[0].totalCalories,
+                        exerciseCalories = diaryResult.diaryData.dataExercise.totalCalories,
+                        calorieNeeds = calorieNeeds.toLong(),
+                    )
+                    emit(Result.Success(data))
                 }
             }
         }catch (e: Exception){
             Log.d("Repository", "getHome: ${e.message.toString()} ")
             emit(Result.Error(e.message.toString()))
         }
+    }
+
+    private fun calculateCalorieNeeds(data: ProfileData): Double{
+        val bmr = if(data.gender == "male"){(10*data.weight) + (6.25*data.height) - (5*data.age) + 5
+        }else{ (10*data.weight) + (6.25*data.height) - (5*data.age) - 161 }
+        val activityLevel = when (data.activity){
+            "light" -> 1.375
+            "moderate" -> 1.55
+            "active" -> 1.725
+            else -> 1.9
+        }
+        return bmr*activityLevel
     }
 
     fun getDiary(startDate: String) = flow {
@@ -116,6 +149,7 @@ class Repository private constructor(private val apiService: ApiService, private
 
 
     fun getFood(query: String) = flow {
+        Log.i("TEST", "getFood: $query")
         emit(Result.Loading)
         try{
             authPreferences.getToken().collect{
@@ -136,6 +170,7 @@ class Repository private constructor(private val apiService: ApiService, private
             authPreferences.getToken().collect{
                 if (it != null) {
                     val userId = apiService.getProfile(it).profileData.id
+                    Log.i("TEST", "addMeal: gotUserId")
                     val result = apiService.addMeal(
                         token = it,
                         userId = userId,
@@ -210,7 +245,7 @@ class Repository private constructor(private val apiService: ApiService, private
         }
     }
 
-    fun editProfile(name: String, email: String, gender: String, height: Long, weight: Long, activity: String, goal:String, target: Long) = flow {
+    fun editProfile(name: String, email: String, gender: String, age: Long, height: Long, weight: Long, activity: String, goal:String, target: Long) = flow {
         emit(Result.Loading)
         try{
             authPreferences.getToken().collect{
@@ -227,6 +262,7 @@ class Repository private constructor(private val apiService: ApiService, private
                         activity = activity,
                         goal = goal,
                         target = target,
+                        age = age
                     )
                     emit(Result.Success(result))
                 }
@@ -267,5 +303,6 @@ class Repository private constructor(private val apiService: ApiService, private
         private const val LEVEL_KEY = "level"
         private const val TARGET_KEY = "target"
         private const val NAME_KEY = "name"
+        private const val AGE_KEY = "age"
     }
 }

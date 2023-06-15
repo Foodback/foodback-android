@@ -81,7 +81,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/danny"
+        android:src="@drawable/no_photo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -164,7 +164,7 @@
         app:layout_constraintTop_toTopOf="@+id/circularProgressBar" />
 
     <TextView
-        android:id="@+id/tv_calories_target_home"
+        android:id="@+id/tv_calories_needs_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

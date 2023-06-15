@@ -1,11 +1,7 @@
 package com.example.foodback.ui.register
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.transition.Slide
-import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +9,12 @@ import androidx.core.widget.doOnTextChanged
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.commit
 import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
 import com.example.foodback.databinding.FragmentTargetBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.login.LoginActivity
 
 class TargetFragment : Fragment() {
 
@@ -45,19 +40,19 @@ class TargetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setButton()
-        binding.edWeight.doOnTextChanged { text, start, before, count ->
+        binding.edWeight.doOnTextChanged { _, _, _, count ->
             targetDisable = if (count < 1) 0 else 1
             setValue()
             setButton()
         }
 
         binding.ivBack.setOnClickListener {
-            navigateFragment(3)
+            navigateFragment(4)
         }
 
         binding.btnNextTarget.setOnClickListener {
             registerViewModel.addData(TARGET_KEY, target)
-            navigateFragment(5)
+            navigateFragment(6)
         }
     }
 

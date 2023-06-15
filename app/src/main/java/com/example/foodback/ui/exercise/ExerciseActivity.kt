@@ -19,8 +19,8 @@ import com.example.foodback.ui.ViewModelFactory
 
 class ExerciseActivity : AppCompatActivity() {
 
-    private var _activitExerciseBinding: ActivityExerciseBinding? = null
-    private val binding get() = _activitExerciseBinding!!
+    private var _activityExerciseBinding: ActivityExerciseBinding? = null
+    private val binding get() = _activityExerciseBinding!!
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
@@ -32,12 +32,11 @@ class ExerciseActivity : AppCompatActivity() {
     private val mExerciseFormFragment = ExerciseFormFragment()
     private val mExerciseSearchFragment = ExerciseSearchFragment()
     private val fragment = mFragmentManager.findFragmentByTag(ExerciseFormFragment::class.java.simpleName)
-    private var title : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        _activitExerciseBinding = ActivityExerciseBinding.inflate(layoutInflater)
+        _activityExerciseBinding = ActivityExerciseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val date: String? = intent.getStringExtra(EXTRA_DATE)
@@ -104,7 +103,7 @@ class ExerciseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _activitExerciseBinding = null
+        _activityExerciseBinding = null
     }
 
     companion object{

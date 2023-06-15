@@ -3,8 +3,6 @@ package com.example.foodback.ui.register
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +10,7 @@ import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
@@ -19,7 +18,6 @@ import com.example.foodback.data.Result
 import com.example.foodback.databinding.FragmentRegisterBinding
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.login.LoginActivity
-import kotlin.math.log
 
 class RegisterFragment : Fragment() {
 
@@ -43,7 +41,7 @@ class RegisterFragment : Fragment() {
 
         binding.ivBack.setOnClickListener {
             val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
-            viewPager?.currentItem = 5
+            viewPager?.currentItem = 6
         }
 
         binding.btnRegister.setOnClickListener {

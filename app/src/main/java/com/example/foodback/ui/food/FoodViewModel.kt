@@ -7,7 +7,6 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.foodback.data.Repository
 import com.example.foodback.data.Result
-import com.example.foodback.data.remote.response.ExerciseResponse
 import com.example.foodback.data.remote.response.FoodResponse
 import kotlinx.coroutines.launch
 
@@ -24,10 +23,6 @@ class FoodViewModel(private val repository: Repository) : ViewModel() {
     private var _label = String()
     val label: String
         get() = _label
-
-    init {
-        getFood()
-    }
 
     fun setDate(date: String){
         _date = date

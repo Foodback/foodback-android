@@ -3,8 +3,6 @@ package com.example.foodback.ui.exercise
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +10,12 @@ import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.foodback.R
 import com.example.foodback.data.Result
 import com.example.foodback.databinding.FragmentExerciseFormBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.food.FoodActivity
 import com.example.foodback.ui.main.DiaryFragment
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class ExerciseFormFragment : Fragment() {
 

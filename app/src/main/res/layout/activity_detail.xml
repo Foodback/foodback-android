@@ -7,13 +7,232 @@
     android:background="@color/orange_1"
     tools:context=".ui.detail.DetailActivity">
 
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_detail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_image_detail" />
+
+    <TextView
+        android:id="@+id/tv_name_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/bold"
+        android:text="Food Name"
+        android:textColor="@color/black_4"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_calories_detail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_image_detail" />
+
+    <TextView
+        android:id="@+id/tv_calories_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:text="Calories"
+        android:textColor="@color/black_4"
+        android:textSize="20sp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_fat_detail"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_detail" />
+
+    <TextView
+        android:id="@+id/tv_calories_detail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:textColor="@color/black_2"
+        android:layout_marginStart="4dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_calories_detail"
+        app:layout_constraintStart_toEndOf="@+id/tv_calories_detail"
+        app:layout_constraintTop_toTopOf="@+id/tv_calories_detail" />
+
+    <TextView
+        android:id="@+id/tv_fat_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:text="Fat"
+        android:textColor="@color/black_4"
+        android:textSize="20sp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_cholestrol_detail"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_calories_detail" />
+
+    <TextView
+        android:id="@+id/tv_fat_detail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:textColor="@color/black_2"
+        android:layout_marginStart="4dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_fat_detail"
+        app:layout_constraintStart_toEndOf="@+id/tv_fat_detail"
+        app:layout_constraintTop_toTopOf="@+id/tv_fat_detail" />
+
+    <TextView
+        android:id="@+id/tv_cholestrol_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:text="Cholesterol"
+        android:textColor="@color/black_4"
+        android:textSize="20sp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_sugar_detail"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_fat_detail" />
+
+    <TextView
+        android:id="@+id/tv_cholestrol_detail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:textColor="@color/black_2"
+        android:layout_marginStart="4dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_cholestrol_detail"
+        app:layout_constraintStart_toEndOf="@+id/tv_cholestrol_detail"
+        app:layout_constraintTop_toTopOf="@+id/tv_cholestrol_detail" />
+
+    <TextView
+        android:id="@+id/tv_sugar_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:text="Sugar"
+        android:textColor="@color/black_4"
+        android:textSize="20sp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_protein_detail"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cholestrol_detail" />
+
+    <TextView
+        android:id="@+id/tv_sugar_detail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:textColor="@color/black_2"
+        android:layout_marginStart="4dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_sugar_detail"
+        app:layout_constraintStart_toEndOf="@+id/tv_sugar_detail"
+        app:layout_constraintTop_toTopOf="@+id/tv_sugar_detail" />
+
+    <TextView
+        android:id="@+id/tv_protein_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:text="Protein"
+        android:textColor="@color/black_4"
+        android:textSize="20sp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_calcium_detail"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sugar_detail" />
+
+    <TextView
+        android:id="@+id/tv_protein_detail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:textColor="@color/black_2"
+        android:layout_marginStart="4dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_protein_detail"
+        app:layout_constraintStart_toEndOf="@+id/tv_protein_detail"
+        app:layout_constraintTop_toTopOf="@+id/tv_protein_detail" />
+
+    <TextView
+        android:id="@+id/tv_calcium_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:text="Calcium"
+        android:textColor="@color/black_4"
+        android:textSize="20sp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_iron_detail"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_protein_detail" />
+
+    <TextView
+        android:id="@+id/tv_calcium_detail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:textColor="@color/black_2"
+        android:layout_marginStart="4dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_calcium_detail"
+        app:layout_constraintStart_toEndOf="@+id/tv_calcium_detail"
+        app:layout_constraintTop_toTopOf="@+id/tv_calcium_detail" />
+
+    <TextView
+        android:id="@+id/tv_iron_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:text="Iron"
+        android:textColor="@color/black_4"
+        android:textSize="20sp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add_to_diary_detail"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_calcium_detail" />
+
+    <TextView
+        android:id="@+id/tv_iron_detail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/semi_bold"
+        android:textColor="@color/black_2"
+        android:layout_marginStart="4dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_iron_detail"
+        app:layout_constraintStart_toEndOf="@+id/tv_iron_detail"
+        app:layout_constraintTop_toTopOf="@+id/tv_iron_detail" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_image_detail"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginVertical="32dp"
+        android:src="@drawable/no_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <Button
         android:id="@+id/btn_add_to_diary_detail"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="42dp"
         android:background="@drawable/button"
         android:fontFamily="@font/bold"
         android:text="Add to diary"
@@ -24,68 +243,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/bg_detail"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_image_detail"
-        tools:layout_editor_absoluteX="-16dp" />
-
-    <TextView
-        android:id="@+id/tv_name_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/medium"
-        android:text="Food Name"
-        android:textColor="@color/black_3"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_calories_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/semi_bold"
-        android:text="Calories"
-        android:textColor="@color/black_4"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view2" />
-
-    <TextView
-        android:id="@+id/tv_calories_detail2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/semi_bold"
-        android:text="2000 Cal"
-        android:textColor="@color/black_2"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_calories_detail" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/iv_image_detail"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/danny"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_detail" />
-
-
 
 
     <ProgressBar

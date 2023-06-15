@@ -6,8 +6,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +14,10 @@ import android.view.Window
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.SearchView
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,9 +27,6 @@ import com.example.foodback.data.Result
 import com.example.foodback.databinding.FragmentExerciseSearchBinding
 import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.main.DiaryFragment
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class ExerciseSearchFragment : Fragment() {
 
@@ -60,7 +54,7 @@ class ExerciseSearchFragment : Fragment() {
             dialog.setCancelable(true)
             dialog.setContentView(R.layout.dialog_exercise)
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.window?.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+            dialog.window?.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         }
         val btnYes = dialog.findViewById<Button>(R.id.alert_yes_exercise)
         val btnNo = dialog.findViewById<Button>(R.id.alert_no_exercise)

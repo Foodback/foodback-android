@@ -55,6 +55,14 @@ class EditProfileActivity : AppCompatActivity() {
         binding.edHeightEdit.setText(profileData?.height.toString())
         binding.edWeightEdit.setText(profileData?.weight.toString())
         binding.edTargetEdit.setText(profileData?.target.toString())
+        binding.edAgeEdit.setText(profileData?.age.toString())
+        binding.autoCompleteGender.setText(profileData?.gender.toString())
+        binding.autoCompleteActivity.setText(profileData?.activity.toString())
+        binding.autoCompleteGoal.setText(profileData?.goal.toString())
+
+        gender = profileData?.gender.toString()
+        activity = profileData?.activity.toString()
+        goal = profileData?.goal.toString()
 
         val adapterGender = ArrayAdapter(this@EditProfileActivity, R.layout.item_dropdown, listOf("male", "female"))
         val adapterActivity = ArrayAdapter(this@EditProfileActivity, R.layout.item_dropdown, listOf("light", "moderate", "active","very active"))
@@ -88,12 +96,13 @@ class EditProfileActivity : AppCompatActivity() {
 
         binding.btnSaveEdit.setOnClickListener {
             val name = binding.edUsernameEdit.text.toString().trim()
+            val age = binding.edAgeEdit.text.toString().trim()
             val email =  binding.edEmailEdit.text.toString().trim()
             val height  = binding.edHeightEdit.text.toString().trim()
             val weight = binding.edWeightEdit.text.toString().trim()
             val target = binding.edTargetEdit.text.toString().trim()
             if(name .isNotBlank() && email.isNotBlank() && gender.isNotBlank() && height.isNotBlank() && weight.isNotBlank() && activity.isNotBlank() && goal.isNotBlank() && target.isNotBlank()){
-                editProfileViewModel.editProfile(name, email, gender, height.toLong(), weight.toLong(), activity, goal, target.toLong()).observe(this){ result ->
+                editProfileViewModel.editProfile(name, email, gender, age.toLong(), height.toLong(), weight.toLong(), activity, goal, target.toLong()).observe(this){ result ->
                     when(result){
                         is Result.Loading ->{
                             binding.pbEditProfile.visibility = View.VISIBLE

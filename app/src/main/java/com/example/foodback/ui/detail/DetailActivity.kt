@@ -3,9 +3,10 @@ package com.example.foodback.ui.detail
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -14,26 +15,24 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.fragment.app.activityViewModels
-import com.bumptech.glide.Glide
 import com.example.foodback.R
+import com.example.foodback.data.DetailModel
 import com.example.foodback.data.Result
 import com.example.foodback.databinding.ActivityDetailBinding
-import com.example.foodback.databinding.ActivityMainBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.edit.EditProfileViewModel
-import com.example.foodback.ui.food.FoodActivity
-import com.example.foodback.ui.food.FoodViewModel
-import com.example.foodback.ui.main.ProfileFragment
-import com.example.foodback.ui.preview.PreviewActivity
+import com.example.foodback.ui.main.DiaryFragment
+import java.io.File
 
 class DetailActivity : AppCompatActivity() {
 
-    private var _activitDetailBinding: ActivityDetailBinding? = null
-    private val binding get() = _activitDetailBinding!!
+    private var getFile: File? = null
+
+    private var _activityDetailBinding: ActivityDetailBinding? = null
+    private val binding get() = _activityDetailBinding!!
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
@@ -41,22 +40,43 @@ class DetailActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(dataStore)
     }
 
-    private val foodViewModel: FoodViewModel by viewModels {
-        ViewModelFactory.getInstance(dataStore)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        _activitDetailBinding = ActivityDetailBinding.inflate(layoutInflater)
+        _activityDetailBinding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.hide()
 
-        val label = intent.getStringExtra(PreviewActivity.EXTRA_LABEL)?:""
-        val date = intent.getStringExtra(PreviewActivity.EXTRA_DATE)?:""
-        val output: String? = intent.getStringExtra(EXTRA_OUTPUT)
-        binding.tvNameDetail.text = output
+        val detailData = if (Build.VERSION.SDK_INT >= 33) {
+            intent.getParcelableExtra(EXTRA_DATA, DetailModel::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra(EXTRA_DATA)
+        }?:DetailModel("",0, "", "", "", "", "", "")
+
+        val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra(EXTRA_PICTURE, File::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getSerializableExtra(EXTRA_PICTURE)
+        } as? File
+        val label = intent.getStringExtra(EXTRA_LABEL)?:""
+        val date = intent.getStringExtra(EXTRA_DATE)?:""
+        myFile?.let { file ->
+            getFile = file
+            binding.ivImageDetail.setImageBitmap(BitmapFactory.decodeFile(file.path))
+        }
+
+        binding.tvNameDetail.text = detailData.name
+        binding.tvCaloriesDetail2.text = "${detailData.calorie} Cal"
+        binding.tvFatDetail2.text = detailData.fat
+        binding.tvCholestrolDetail2.text = detailData.cholesterol
+        binding.tvSugarDetail2.text = detailData.sugar
+        binding.tvProteinDetail2.text = detailData.protein
+        binding.tvCalciumDetail2.text = detailData.calcium
+        binding.tvIronDetail2.text = detailData.iron
+
 
         val dialog = Dialog(this)
         dialog.apply {
@@ -64,68 +84,48 @@ class DetailActivity : AppCompatActivity() {
             dialog.setCancelable(true)
             dialog.setContentView(R.layout.dialog_food)
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         }
         val btnYes = dialog.findViewById<Button>(R.id.alert_yes_food)
         val btnNo = dialog.findViewById<Button>(R.id.alert_no_food)
         val edAmount = dialog.findViewById<EditText>(R.id.ed_amount_alert)
 
-
-
-        foodViewModel.foodData.observe(this@DetailActivity){ foodResult ->
-            when(foodResult){
-                is Result.Loading ->{
-                    binding.pbDetail.visibility = View.VISIBLE
-                }
-                is Result.Success ->{
-                    binding.pbDetail.visibility = View.GONE
-                    Glide.with(this@DetailActivity)
-                        .load(foodResult.data.foodData.menuItems[0].image)
-                        .error(R.drawable.danny)
-                        .into(binding.ivImageDetail)
-                    binding.tvCaloriesDetail2.text = foodResult.data.foodData.menuItems[0].nutrition.calories.toString()
-                    binding.btnAddToDiaryDetail.setOnClickListener {
-                        val name = foodResult.data.foodData.menuItems[0].title
-                        val calories = foodResult.data.foodData.menuItems[0].nutrition.calories
-                        btnYes.setOnClickListener {
-                            detailViewModel.addMeal(label, name, edAmount.toString().toLong(), calories, date).observe(this){ addResult ->
-                                when(addResult){
-                                    is Result.Loading ->{
-                                        binding.pbDetail.visibility = View.VISIBLE
-                                    }
-                                    is Result.Success ->{
-                                        binding.pbDetail.visibility = View.GONE
-                                        Toast.makeText(this@DetailActivity, addResult.data.message, Toast.LENGTH_SHORT).show()
-                                        setResult(ProfileFragment.RESULT_OK, Intent())
-                                        finish()
-                                    }
-                                    is Result.Error ->{
-                                        binding.pbDetail.visibility = View.GONE
-                                        Toast.makeText(this@DetailActivity, addResult.error, Toast.LENGTH_SHORT).show()
-                                    }
-                                }
-                            }
+        binding.btnAddToDiaryDetail.setOnClickListener {
+            btnYes.setOnClickListener {
+                val amount = edAmount.text.toString().toLong()
+                detailViewModel.addMeal(label, detailData.name, amount, detailData.calorie*amount, date).observe(this){ addResult ->
+                    when(addResult){
+                        is Result.Loading ->{
+                            binding.pbDetail.visibility = View.VISIBLE
                         }
-                        btnNo.setOnClickListener { dialog.dismiss() }
-                        dialog.show()
+                        is Result.Success ->{
+                            binding.pbDetail.visibility = View.GONE
+                            Toast.makeText(this@DetailActivity, addResult.data.message, Toast.LENGTH_SHORT).show()
+                            setResult(DiaryFragment.RESULT_OK, Intent())
+                            finish()
+                        }
+                        is Result.Error ->{
+                            binding.pbDetail.visibility = View.GONE
+                            Toast.makeText(this@DetailActivity, addResult.error, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
-                is Result.Error ->{
-                    binding.pbDetail.visibility = View.GONE
-                    Toast.makeText(this@DetailActivity, foodResult.error, Toast.LENGTH_SHORT).show()
-                }
             }
+            btnNo.setOnClickListener { dialog.dismiss() }
+            dialog.show()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        _activitDetailBinding = null
+        _activityDetailBinding = null
     }
 
     companion object{
         const val EXTRA_LABEL = "extra_label"
         const val EXTRA_DATE = "extra_date"
-        const val EXTRA_OUTPUT = "extra_output"
+        const val EXTRA_DATA = "extra_data"
+        const val EXTRA_PICTURE = "extra_picture"
+        const val EXTRA_IS_BACK_CAMERA = "extra_isBackCamera"
     }
 }

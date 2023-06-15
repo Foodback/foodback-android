@@ -32,7 +32,6 @@ class FoodActivity : AppCompatActivity() {
     private val mFoodFormFragment = FoodFormFragment()
     private val mFoodSearchFragment = FoodSearchFragment()
     private val fragment = mFragmentManager.findFragmentByTag(FoodFormFragment::class.java.simpleName)
-    private var title : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

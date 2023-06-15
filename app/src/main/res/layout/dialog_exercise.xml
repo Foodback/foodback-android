@@ -20,10 +20,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/semi_bold"
             android:text="Duration in "
-            android:textColor="@color/black_2"
-            app:layout_constraintHorizontal_chainStyle="packed"
+            android:textColor="@color/black_3"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/tv_minute_alert"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,37 +42,43 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_duration_alert"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/edit_text"
             android:inputType="number"
             android:padding="8dp"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/alert_yes_exercise"
+            app:layout_constraintStart_toStartOf="@+id/alert_no_exercise"
             app:layout_constraintTop_toBottomOf="@+id/tv_duration_alert" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/alert_no_exercise"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/button"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="80dp"
+            android:background="@drawable/button2"
             android:fontFamily="@font/bold"
             android:text="No"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/orange_5"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/alert_yes_exercise"
+            app:layout_constraintEnd_toEndOf="@+id/tv_minute_alert"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ed_duration_alert" />
 
         <Button
             android:id="@+id/alert_yes_exercise"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/button"
             android:fontFamily="@font/bold"
             android:text="Yes"
@@ -80,7 +86,7 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/alert_no_exercise"
+            app:layout_constraintStart_toStartOf="@+id/tv_duration_alert"
             app:layout_constraintTop_toBottomOf="@+id/ed_duration_alert" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

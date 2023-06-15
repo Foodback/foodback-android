@@ -3,7 +3,6 @@ package com.example.foodback.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +55,7 @@ class ProfileFragment : Fragment() {
         val launcherEditProfileActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 mainViewModel.getProfile()
+                mainViewModel.getHome()
             }
         }
 
@@ -72,6 +72,7 @@ class ProfileFragment : Fragment() {
                     binding.tvNameProfile.text = result.data.profileData.username
                     binding.tvEmailProfile.text = result.data.profileData.email
                     binding.tvGenderProfile.text = result.data.profileData.gender
+                    binding.tvAgeProfile.text = result.data.profileData.age.toString()
                     binding.tvHeightProfile.text = "${result.data.profileData.height}"
                     binding.tvWeightProfile.text = "${result.data.profileData.weight}"
                     binding.tvActivityLevelProfile.text = result.data.profileData.activity
@@ -108,7 +109,7 @@ class ProfileFragment : Fragment() {
                             }
                         }
                     }
-                }.setNegativeButton("No"){dialogInterface, _, -> dialogInterface.cancel()}
+                }.setNegativeButton("No") { dialogInterface, _ -> dialogInterface.cancel()}
                 .show()
         }
 

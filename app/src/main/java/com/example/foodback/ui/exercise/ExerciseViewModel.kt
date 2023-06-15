@@ -7,10 +7,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.foodback.data.Repository
 import com.example.foodback.data.Result
-import com.example.foodback.data.remote.response.ExerciseData
 import com.example.foodback.data.remote.response.ExerciseResponse
-import com.example.foodback.data.remote.response.FoodResponse
-import com.example.foodback.data.remote.response.ProfileResponse
 import kotlinx.coroutines.launch
 
 class ExerciseViewModel(private val repository: Repository) : ViewModel() {
