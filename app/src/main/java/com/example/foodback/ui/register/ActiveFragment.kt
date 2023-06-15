@@ -21,10 +21,7 @@ class ActiveFragment : Fragment() {
     }
     private var level: String = ""
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         level = "active"
         val bundle = Bundle()
         bundle.putString(LEVEL_KEY, level)
@@ -33,6 +30,6 @@ class ActiveFragment : Fragment() {
     }
 
     companion object {
-        var LEVEL_KEY = "level"
+        const val LEVEL_KEY = "level"
     }
 }

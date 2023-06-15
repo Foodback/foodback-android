@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-parcelize'
 //    id 'kotlin-kapt'
 }
 
@@ -17,7 +18,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BASE_URL", '"https://story-api.dicoding.dev/v1/"')
+        buildConfigField("String", "BASE_URL", '"https://flawless-window-387611.et.r.appspot.com/api/"')
     }
 
     buildTypes {
@@ -36,6 +37,7 @@ android {
     buildFeatures {
         buildConfig true
         viewBinding true
+        mlModelBinding true
     }
 }
 
@@ -50,7 +52,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    // Retrofit and Inceptor
+    // Retrofit and Interceptor
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
@@ -77,14 +79,22 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:1.2.2"
     implementation "androidx.camera:camera-view:1.2.2"
 
-    //Room
-    implementation "androidx.room:room-runtime:2.5.1"
-    implementation "androidx.room:room-ktx:2.5.1"
-//    kapt "androidx.room:room-compiler:2.5.1"
-
     //Dots Indicator
     implementation "com.tbuonomo:dotsindicator:4.3"
 
     //Gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+
+    //TensorFlow Lite
+    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
+
+    //Circular Progressbar
+    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.15.0'
+
+    //Shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }

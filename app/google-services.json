@@ -1,26 +1,36 @@
 {
   "project_info": {
-    "project_number": "193317034512",
-    "project_id": "foodback-ef241",
-    "storage_bucket": "foodback-ef241.appspot.com"
+    "project_number": "372709304234",
+    "project_id": "flawless-window-387611",
+    "storage_bucket": "flawless-window-387611.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:193317034512:android:be0032eafe64cbfe27c895",
+        "mobilesdk_app_id": "1:372709304234:android:d13967c182efbe0aa8edd3",
         "android_client_info": {
           "package_name": "com.example.foodback"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "372709304234-rl3fq1raetca40qdodko3a0me6arkbdk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDgvaQw_ZjdAxrgnpF-LLo09ScJXJ98x8M"
+          "current_key": "AIzaSyAN6s2_j5iMizx-_56qF2PWWdhhEr_xQlE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372709304234-rl3fq1raetca40qdodko3a0me6arkbdk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

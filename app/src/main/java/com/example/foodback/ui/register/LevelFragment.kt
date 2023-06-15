@@ -1,26 +1,19 @@
 package com.example.foodback.ui.register
 
 import android.content.Context
-import android.content.Intent
-import android.hardware.lights.Light
 import android.os.Bundle
-import android.transition.Slide
-import android.util.Log
-import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.commit
 import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
 import com.example.foodback.databinding.FragmentLevelBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.login.LoginActivity
 
 class LevelFragment : Fragment() {
 
@@ -45,14 +38,14 @@ class LevelFragment : Fragment() {
 
         binding.ivBack.setOnClickListener {
             if (goal == "maintain") {
-                navigateFragment(3)
-            } else {
                 navigateFragment(4)
+            } else {
+                navigateFragment(5)
             }
         }
 
         binding.btnNextLevel.setOnClickListener {
-            navigateFragment(6)
+            navigateFragment(7)
         }
 
         val fragmentList = arrayListOf(

@@ -2,14 +2,13 @@ package com.example.foodback.ui.register
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.foodback.R
 import com.example.foodback.ui.ViewModelFactory
@@ -22,10 +21,7 @@ class LightFragment : Fragment() {
     }
     private var level: String = ""
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         level = "light"
         val bundle = Bundle()
         bundle.putString(LEVEL_KEY, level)
@@ -34,6 +30,6 @@ class LightFragment : Fragment() {
     }
 
     companion object{
-        var LEVEL_KEY = "level"
+        const val LEVEL_KEY = "level"
     }
 }

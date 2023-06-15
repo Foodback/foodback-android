@@ -18,7 +18,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-medium"
             android:text="Already have an account?"
-            android:textColor="@color/second_text1"
+            android:textColor="@color/black_3"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dotsIndicator" />
@@ -32,7 +32,7 @@
             android:fontFamily="@font/medium"
             android:text="Sign In"
             android:textAllCaps="false"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/orange_5"
             app:layout_constraintBottom_toBottomOf="@+id/textView7"
             app:layout_constraintStart_toEndOf="@+id/textView7"
             app:layout_constraintTop_toTopOf="@+id/textView7" />
@@ -45,18 +45,17 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="32dp"
             app:dotsClickable="false"
-            app:dotsColor="#b7e4c7"
+            app:dotsColor="@color/orange_1"
             app:dotsSize="10dp"
             app:dotsSpacing="8dp"
             app:dotsWidthFactor="5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewPager"
-            app:selectedDotColor="@color/primary"
+            app:selectedDotColor="@color/orange_5"
             tools:ignore="MissingClass" />
 
         <androidx.viewpager2.widget.ViewPager2
-
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="670dp"

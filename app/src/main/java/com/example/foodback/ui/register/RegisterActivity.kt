@@ -1,15 +1,9 @@
 package com.example.foodback.ui.register
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
+import androidx.appcompat.app.AppCompatActivity
 import com.example.foodback.databinding.ActivityRegisterBinding
-import com.example.foodback.ui.ViewModelFactory
 import com.example.foodback.ui.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
@@ -32,6 +26,7 @@ class RegisterActivity : AppCompatActivity() {
             StartFragment(),
             GoalFragment(),
             GenderFragment(),
+            AgeFragment(),
             CurrentFragment(),
             TargetFragment(),
             LevelFragment(),

@@ -14,5 +14,5 @@ class RegisterViewModel(private val repository: Repository) : ViewModel() {
         _data[key] = data
     }
 
-    fun register(email: String, password: String) = repository.register(email, password).asLiveData()
+    fun register(email: String, password: String) = repository.register(email, password, data).asLiveData()
 }

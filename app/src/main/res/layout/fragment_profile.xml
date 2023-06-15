@@ -7,86 +7,333 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_profile"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/no_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/danny" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_name_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Dhanny Phantom"
+        android:fontFamily="@font/semi_bold"
+        android:textColor="@color/black_4"
+        android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="@+id/iv_profile"
         app:layout_constraintStart_toStartOf="@+id/iv_profile"
         app:layout_constraintTop_toBottomOf="@+id/iv_profile" />
 
     <TextView
-        android:id="@+id/tv_gender_profile"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Laki-Laki"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_name_profile"
-        app:layout_constraintStart_toStartOf="@+id/tv_name_profile"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/medium"
+        android:text="Email"
+        android:textColor="@color/black_4"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name_profile" />
 
     <TextView
-        android:id="@+id/tv_height_weight_profile"
+        android:id="@+id/tv_email_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="168/50"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_gender_profile"
-        app:layout_constraintStart_toStartOf="@+id/tv_gender_profile"
-        app:layout_constraintTop_toBottomOf="@+id/tv_gender_profile" />
+        android:fontFamily="@font/medium"
+        android:layout_marginEnd="24dp"
+        android:text="AAAAAAA"
+        android:textColor="@color/black_2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/medium"
+        android:text="Gender"
+        android:textColor="@color/black_4"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView42"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/tv_gender_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/medium"
+        android:text="AAAAAAA"
+        android:textColor="@color/black_2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+<!--    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/medium"
+        android:text="Age"
+        android:textColor="@color/black_4"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/tv_age_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/medium"
+        android:text="AAAAAAA"
+        android:textColor="@color/black_2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView42"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView42" />
+<!--    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/medium"
+        android:text="Weight"
+        android:textColor="@color/black_4"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+    <TextView
+        android:id="@+id/tv_weight_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/medium"
+        android:text="AAAAAAA"
+        android:textColor="@color/black_2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/medium"
+        android:text="Height"
+        android:textColor="@color/black_4"
+        android:layout_marginHorizontal="16dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/tv_height_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/medium"
+        android:text="AAAAAAA"
+        android:textColor="@color/black_2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/medium"
+        android:text="Daily Activity"
+        android:textColor="@color/black_4"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/tv_activity_level_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Active"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_height_weight_profile"
-        app:layout_constraintStart_toStartOf="@+id/tv_height_weight_profile"
-        app:layout_constraintTop_toBottomOf="@+id/tv_height_weight_profile" />
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/medium"
+        android:text="AAAAAAA"
+        android:textColor="@color/black_2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/medium"
+        android:text="Goal"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black_4"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/tv_goal_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Weight Gain"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_activity_level_profile"
-        app:layout_constraintStart_toStartOf="@+id/tv_activity_level_profile"
-        app:layout_constraintTop_toBottomOf="@+id/tv_activity_level_profile" />
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/medium"
+        android:text="AAAAAAA"
+        android:textColor="@color/black_2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/medium"
+        android:text="Target"
+        android:textColor="@color/black_4"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_edit_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/tv_target_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="60KG"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_goal_profile"
-        app:layout_constraintStart_toStartOf="@+id/tv_goal_profile"
-        app:layout_constraintTop_toBottomOf="@+id/tv_goal_profile" />
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/medium"
+        android:text="AAAAAAA"
+        android:textColor="@color/black_2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView12" />
 
-    <Button
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_edit_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_logout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bg_button" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/medium"
+            android:text="Edit Profil"
+            android:textColor="@color/black_4"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+            app:layout_constraintStart_toEndOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="@+id/imageView7"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+            app:layout_constraintEnd_toEndOf="@+id/imageView7"
+            app:layout_constraintStart_toStartOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="@+id/imageView7"
+            app:srcCompat="@drawable/user_pen_24"
+            app:tint="@color/orange_5"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_target_profile"
-        app:layout_constraintStart_toStartOf="@+id/tv_target_profile"
-        app:layout_constraintTop_toBottomOf="@+id/tv_target_profile" />
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile">
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bg_button" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+            app:layout_constraintEnd_toEndOf="@+id/imageView8"
+            app:layout_constraintStart_toStartOf="@+id/imageView8"
+            app:layout_constraintTop_toTopOf="@+id/imageView8"
+            app:srcCompat="@drawable/sign_out_alt_24"
+            app:tint="@color/orange_5" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/medium"
+            android:text="Logout"
+            android:textColor="@color/black_4"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView8"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
-        android:id="@+id/pb_logout"
+        android:id="@+id/pb_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -96,4 +343,3 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

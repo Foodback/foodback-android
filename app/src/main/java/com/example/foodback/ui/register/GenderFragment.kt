@@ -1,9 +1,7 @@
 package com.example.foodback.ui.register
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +9,12 @@ import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.foodback.R
 import com.example.foodback.databinding.FragmentGenderBinding
-import com.example.foodback.databinding.FragmentStartBinding
 import com.example.foodback.ui.ViewModelFactory
-import com.example.foodback.ui.onboarding.OnBoardingActivity
 
 class GenderFragment : Fragment() {
 
@@ -69,9 +66,9 @@ class GenderFragment : Fragment() {
     }
 
     private fun setColorBackground(){
-        val primaryColor = ContextCompat.getColor(requireContext(), R.color.primary)
+        val primaryColor = ContextCompat.getColor(requireContext(), R.color.orange_3)
         val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
-        val textColor = ContextCompat.getColor(requireContext(), R.color.second_text2)
+        val textColor = ContextCompat.getColor(requireContext(), R.color.black_3)
         val maleAfter = ContextCompat.getDrawable(requireContext(), R.drawable.male_after)
         val male = ContextCompat.getDrawable(requireContext(), R.drawable.male)
         val femaleAfter = ContextCompat.getDrawable(requireContext(), R.drawable.female_after)

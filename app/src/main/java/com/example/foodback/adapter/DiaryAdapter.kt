@@ -1,45 +1,56 @@
 package com.example.foodback.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foodback.data.FakeAddButton
-import com.example.foodback.data.FakeData
+import com.example.foodback.data.AddButton
+import com.example.foodback.data.DiaryType
+import com.example.foodback.data.remote.response.Exercise
+import com.example.foodback.data.remote.response.Meal
 import com.example.foodback.databinding.ItemButtonBinding
 import com.example.foodback.databinding.ItemListBinding
 import com.example.foodback.databinding.ItemTypeBinding
 
-class DiaryAdapter(private val data: List<Any>, private val onClickData: (FakeData) -> Unit, private val  onDeleteData: (FakeData) -> Unit, private val onAddFood: () -> Unit, private val onAddExercises: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DiaryAdapter(private val data: List<Any>, private val onAddFood: (String) -> Unit, private val onAddExercises: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class TypeViewHolder(var binding: ItemTypeBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(type: String){
-            binding.itemType.text = type
+        fun bind(type: DiaryType){
+            binding.itemTypeCalorie.text = "${type.calorie} Cal"
+            binding.imgType.setImageResource(type.image)
+            binding.itemType.text = type.name
         }
     }
 
-    inner class DataViewHolder(var binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(data: FakeData){
-            binding.tvName.text = data.name
-            binding.tvDecs.text = data.desc
-            binding.btnRemove.setOnClickListener { onDeleteData(data) }
-            this.itemView.setOnClickListener { onClickData(data) }
+    inner class FoodViewHolder(var binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(data: Meal){
+            binding.tvNameList.text = data.name
+            binding.tvDescList.text = "${data.amount} Gram"
+            binding.tvCalorieList.text = "${data.calories} Cal"
+        }
+    }
+
+    inner class ExerciseViewHolder(var binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(data: Exercise){
+            binding.tvNameList.text = data.name
+            binding.tvDescList.text = "${data.duration} Minute"
+            binding.tvCalorieList.text = "${data.calories} Cal"
         }
     }
 
     inner class ButtonViewHolder(var binding: ItemButtonBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(button: FakeAddButton){
-            binding.btnAdd.text = button.name
-            if(button.isFood) binding.btnAdd.setOnClickListener { onAddFood() }
-            else binding.btnAdd.setOnClickListener { onAddExercises() }
+        fun bind(button: AddButton){
+            binding.tvItemAdd.text = button.hint
+            if(button.isFood) binding.layoutAddDiary.setOnClickListener { onAddFood(button.label) }
+            else binding.layoutAddDiary.setOnClickListener { onAddExercises() }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (data[position]) {
-            is String -> ITEM_TYPE
-            is FakeData -> ITEM_DATA
-            is FakeAddButton -> ITEM_BUTTON
+            is DiaryType -> ITEM_TYPE
+            is Meal -> ITEM_FOOD
+            is Exercise -> ITEM_EXERCISE
+            is AddButton -> ITEM_BUTTON
             else -> throw IllegalArgumentException("Undefined view type")
         }
     }
@@ -47,7 +58,8 @@ class DiaryAdapter(private val data: List<Any>, private val onClickData: (FakeDa
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ITEM_TYPE -> TypeViewHolder(ItemTypeBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-            ITEM_DATA -> DataViewHolder(ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            ITEM_FOOD -> FoodViewHolder(ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            ITEM_EXERCISE -> ExerciseViewHolder(ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             ITEM_BUTTON -> ButtonViewHolder(ItemButtonBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             else -> throw IllegalArgumentException("Undefined view type")
         }
@@ -58,15 +70,19 @@ class DiaryAdapter(private val data: List<Any>, private val onClickData: (FakeDa
         when(holder.itemViewType){
             ITEM_TYPE -> {
                 val typeHolder = holder as TypeViewHolder
-                typeHolder.bind(data[position] as String)
+                typeHolder.bind(data[position] as DiaryType)
             }
-            ITEM_DATA -> {
-                val dataHolder = holder as DataViewHolder
-                dataHolder.bind(data[position] as FakeData)
+            ITEM_FOOD -> {
+                val dataHolder = holder as FoodViewHolder
+                dataHolder.bind(data[position] as Meal)
+            }
+            ITEM_EXERCISE -> {
+                val dataHolder = holder as ExerciseViewHolder
+                dataHolder.bind(data[position] as Exercise)
             }
             ITEM_BUTTON -> {
                 val buttonHolder = holder as ButtonViewHolder
-                buttonHolder.bind(data[position] as FakeAddButton)
+                buttonHolder.bind(data[position] as AddButton)
             }
             else -> throw IllegalArgumentException("Undefined view type")
         }
@@ -76,7 +92,8 @@ class DiaryAdapter(private val data: List<Any>, private val onClickData: (FakeDa
 
     companion object {
         private const val ITEM_TYPE = 0
-        private const val ITEM_DATA = 1
-        private const val ITEM_BUTTON = 2
+        private const val ITEM_FOOD = 1
+        private const val ITEM_EXERCISE = 2
+        private const val ITEM_BUTTON = 3
     }
 }
