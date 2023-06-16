@@ -24,7 +24,7 @@ data class HomeModel(
 )
 
 @Parcelize
-data class DetailModel(
+data class DetailModel  (
     val name: String,
     val calorie: Long,
     val fat: String,

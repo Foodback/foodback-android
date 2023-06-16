@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.479"
         app:srcCompat="@drawable/bg_onboard" />
 
     <TextView
@@ -64,7 +65,7 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/button"
         android:fontFamily="@font/bold"
-        android:text="Login"
+        android:text="Already Have Account"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -76,13 +77,13 @@
         android:id="@+id/btnMoveRegister"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="50dp"
         android:layout_marginHorizontal="36dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/button2"
         android:fontFamily="@font/bold"
-        android:text="Register"
+        android:text="Get Started"
         android:textAllCaps="false"
-        android:textColor="@color/orange_4"
+        android:textColor="@color/orange_5"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

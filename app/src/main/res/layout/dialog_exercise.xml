@@ -65,7 +65,7 @@
             android:fontFamily="@font/bold"
             android:text="No"
             android:textAllCaps="false"
-            android:textColor="@color/orange_5"
+            android:textColor="@color/black_4"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_minute_alert"
             app:layout_constraintHorizontal_chainStyle="packed"
