@@ -20,7 +20,7 @@
         android:id="@+id/welcome"
         android:layout_width="272dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/semi_bold"
         android:gravity="top"
@@ -32,9 +32,11 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/weight_loss"
-        android:layout_width="345dp"
+        android:layout_width="0dp"
         android:layout_height="105dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
@@ -53,7 +55,7 @@
                 android:id="@+id/image_weight_loss"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -65,31 +67,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/semi_bold"
                 android:text="Weight Loss"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/desc_weight_loss"
                 app:layout_constraintStart_toEndOf="@+id/image_weight_loss"
-                app:layout_constraintTop_toTopOf="@+id/image_weight_loss" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/desc_weight_loss"
                 android:layout_width="181dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="24dp"
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/medium"
                 android:text="The process of intentionally losing body weight"
                 android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="@+id/image_weight_loss"
-                app:layout_constraintStart_toEndOf="@+id/image_weight_loss" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_weight_loss"
+                app:layout_constraintTop_toBottomOf="@+id/text_weight_loss" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/weight_gain"
-        android:layout_width="345dp"
+        android:layout_width="0dp"
         android:layout_height="105dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
@@ -108,7 +116,7 @@
                 android:id="@+id/image_weight_gain"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -123,28 +131,34 @@
                 android:fontFamily="@font/bold"
                 android:text="Weight gain"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/desc_weight_gain"
                 app:layout_constraintStart_toEndOf="@+id/image_weight_gain"
-                app:layout_constraintTop_toTopOf="@+id/image_weight_gain" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/desc_weight_gain"
                 android:layout_width="181dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="24dp"
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/medium"
                 android:text="The process of gaining additional body weight"
                 android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="@+id/image_weight_gain"
-                app:layout_constraintStart_toEndOf="@+id/image_weight_gain" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_weight_gain"
+                app:layout_constraintTop_toBottomOf="@+id/text_weight_gain" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/calorie_manage"
-        android:layout_width="345dp"
+        android:layout_width="0dp"
         android:layout_height="105dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
@@ -163,7 +177,7 @@
                 android:id="@+id/image_calorie_manage"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -178,20 +192,24 @@
                 android:fontFamily="@font/bold"
                 android:text="Calorie management"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/desc_calorie_manage"
                 app:layout_constraintStart_toEndOf="@+id/image_calorie_manage"
-                app:layout_constraintTop_toTopOf="@+id/image_calorie_manage" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/desc_calorie_manage"
                 android:layout_width="199dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="24dp"
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/medium"
                 android:text="The practice of controlling number of calories consumed"
                 android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="@+id/image_calorie_manage"
-                app:layout_constraintStart_toEndOf="@+id/image_calorie_manage" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_calorie_manage"
+                app:layout_constraintTop_toBottomOf="@+id/text_calorie_manage" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 

@@ -2,6 +2,7 @@ package com.example.foodback.ui.main
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,7 +75,9 @@ class HomeFragment : Fragment() {
                     }
                     binding.burnProgress.apply {
                         setProgressWithAnimation((result.data.exerciseCalories.toFloat()), 1000)
-                        progressMax = (result.data.foodCalories + result.data.target).toFloat()
+                        progressMax = if(result.data.foodCalories < result.data.calorieNeeds) result.data.burnNeeds.toFloat()
+                        else (result.data.foodCalories - result.data.calorieNeeds).toFloat()
+
                     }
                     binding.tvGoalHome.text = result.data.goal
                     binding.tvTargetHome.text = "${result.data.target} Kg"
