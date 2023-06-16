@@ -74,17 +74,26 @@ class Repository private constructor(private val apiService: ApiService, private
         try{
             authPreferences.getToken().collect{
                 if (it != null) {
-                    val homeResult = apiService.getHome(it)
                     val diaryResult = apiService.getDiary(it, date, date)
                     val profileResult = apiService.getProfile(it)
                     val calorieNeeds = calculateCalorieNeeds(profileResult.profileData)
-                    Log.i("TEST", "getHome: $homeResult")
-                    val data = HomeModel(
+                    val burnNeeds = calculateBurnNeeds(profileResult.profileData)
+                    val data = if(diaryResult.diaryData.listDataMeal.isNotEmpty())
+                        HomeModel(
+                            target = profileResult.profileData.target,
+                            goal = profileResult.profileData.goal,
+                            foodCalories = diaryResult.diaryData.listDataMeal[0].totalCalories,
+                            exerciseCalories = diaryResult.diaryData.dataExercise.totalCalories,
+                            calorieNeeds = calorieNeeds.toLong(),
+                            burnNeeds = burnNeeds.toLong()
+                        )
+                    else HomeModel(
                         target = profileResult.profileData.target,
                         goal = profileResult.profileData.goal,
-                        foodCalories = diaryResult.diaryData.listDataMeal[0].totalCalories,
+                        foodCalories = 0,
                         exerciseCalories = diaryResult.diaryData.dataExercise.totalCalories,
                         calorieNeeds = calorieNeeds.toLong(),
+                        burnNeeds = burnNeeds.toLong()
                     )
                     emit(Result.Success(data))
                 }
@@ -105,6 +114,12 @@ class Repository private constructor(private val apiService: ApiService, private
             else -> 1.9
         }
         return bmr*activityLevel
+    }
+
+    private fun calculateBurnNeeds(data: ProfileData): Double{
+        val tmb = if(data.gender == "male"){ (88.362) + (13.397*data.weight) + (4.799*data.height) - (5.677*data.age)
+        }else { (447.593) + (9.247*data.weight) + (3.098*data.height) - (4.330*data.age) }
+        return tmb
     }
 
     fun getDiary(startDate: String) = flow {
